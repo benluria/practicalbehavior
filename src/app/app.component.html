@@ -35,8 +35,8 @@
     </div>
 
     <div id="contactInfo">
-      <a [href]="'tel:' + footerPhone">{{appContent['Phone']}}</a>
-      <a [href]="'mailto:' + footerEmail">{{appContent['Email']}}</a>
+      <a [href]="'tel:' + appContent['Phone']"><span [innerHTML]="appContent['Phone']"></span></a>
+      <a [href]="'mailto:' + appContent['Email']"><span [innerHTML]="appContent['Email']"></span></a>
     </div>
 
     <div id="socialLinks">

@@ -13,7 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { EditContentComponent } from '../app/components/edit-content/edit-content.component';
 import { ListContentComponent } from './components/list-content/list-content.component';
 
 import { AuthService } from './services/auth.service';
@@ -39,8 +38,7 @@ import { CanDeactivateGuard } from './helpers/auth-deactivate';
     AppComponent,
     HomeComponent,
     AdminComponent,
-    ListContentComponent,
-    EditContentComponent
+    ListContentComponent
   ],
   providers: [ 
     AuthService, 

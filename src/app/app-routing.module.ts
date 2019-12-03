@@ -4,7 +4,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from './helpers/auth-guard';
 import { CanDeactivateGuard } from './helpers/auth-deactivate';
-import { EditContentComponent } from './components/edit-content/edit-content.component';
 import { ListContentComponent } from './components/list-content/list-content.component';
 
 const routes: Routes = [
@@ -21,12 +20,6 @@ const routes: Routes = [
   {
     path: 'admin/:page',
     component: ListContentComponent,
-    canActivate: [AuthGuard],
-    canDeactivate: [CanDeactivateGuard]
-  },
-  {
-    path: 'admin/:page/:id',
-    component: EditContentComponent,
     canActivate: [AuthGuard],
     canDeactivate: [CanDeactivateGuard]
   }

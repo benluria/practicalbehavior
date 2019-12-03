@@ -3,19 +3,19 @@
         <img id="heroImg" src="../../../assets/images/hero image@2x.png">
         <div id="heroText" col-6 col-sm-7 col-xs-8>
             <span id="heroHeader" [innerHTML]="appContent['Hero Text']"></span>
-            <span id="heroDescription" [innerHTML]="appContent['Hero Description']"></span>
+            <span id="heroDescription" class="rendered-html" [innerHTML]="appContent['Hero Description']"></span>
         </div>
     </div>
 
-    <p id="mobileDescription">{{appContent['Hero Description']}}</p>
+    <span id="mobileDescription" class="rendered-html" [innerHTML]="appContent['Hero Description']"></span>
 
     <div id="tileContainer">
         <div flex row style="justify-content: space-between;">
             <div *ngFor="let tile of tiles" class="tile">
                 <div class="tile-inner">
-                    <img [src]="domSanitizer.bypassSecurityTrustUrl(tile.imageUrl)" >
+                    <img [src]="domSanitizer.bypassSecurityTrustUrl(tile.imageUrl)">
                     <h4>{{tile.description}}</h4>
-                    <p>{{tile.content}}</p>
+                    <span class="rendered-html" [innerHTML]="tile.content"></span>
                 </div>
             </div>
         </div>
@@ -25,14 +25,12 @@
         <div col-6>
             <div id="referralTextContainer">
                 <h1>{{appContent['Referral Text']}}</h1>
-                <p>{{appContent['Referral Description']}}</p>
+                <span class="rendered-html" [innerHTML]="appContent['Referral Description']"></span>
                 <a [routerLink]="['/referral']">Submit A Referral</a>
             </div>
         </div>
         <div col-6 id="imgContainer">
             <div id="typingPic"></div>
-            <!-- <img src="../../../assets/images/hands_typing.png"> -->
         </div>
     </div>
-
 </div>

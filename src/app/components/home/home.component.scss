@@ -8,7 +8,7 @@
         font-weight: 500;
     }
 
-    p {
+    p, .rendered-html {
         font-weight: 300;
     }
 
@@ -40,7 +40,7 @@
                 font-size: 3rem;
                 line-height: 3.9375rem;
             }
-            p {
+            p, .rendered-html {
                 max-width: 45.625rem;
                 line-height: 1.5rem;
             }
@@ -53,7 +53,7 @@
                     margin-bottom: 0 !important;
                 }
 
-                p {
+                p, .rendered-html {
                     margin-top: 0 !important;
                     // font-size: .9rem;
                 }
@@ -63,7 +63,7 @@
                 top: 8.5rem;
                 left: 2rem; 
 
-                h1, p {
+                h1, p, .rendered-html {
                     margin-top: 0 !important;
                 }
 
@@ -81,7 +81,7 @@
                     line-height: 1.9375rem;
                 }
 
-                p {
+                p, .rendered-html {
                     font-size: .8rem;
                     line-height: 1rem;
                 }
@@ -106,7 +106,7 @@
                     width: 100% !important;
                 }
                 
-                p {
+                p, .rendered-html {
                     display: none;
                 }
             }
@@ -166,7 +166,7 @@
                     line-height: 2.4375rem;
                 }
 
-                p {
+                p, .rendered-html {
                     margin: 0 !important;
                     white-space: normal;
                     text-overflow: ellipsis;
@@ -223,7 +223,7 @@
             white-space: normal;
             overflow: auto;
 
-            p {
+            p, .rendered-html {
                 line-height: 1.5;
             }
 
