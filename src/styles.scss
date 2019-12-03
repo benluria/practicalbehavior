@@ -10,6 +10,11 @@ html,body {
     outline: none;
 }
 
+// class for innerHTML elements
+.rendered-html {
+    display: block;
+}
+
 [flex] {
     display: flex !important;
     flex-wrap: wrap;
