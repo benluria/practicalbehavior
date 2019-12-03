@@ -1,0 +1,414 @@
+@import '../variables.scss';
+
+nav {
+    position: fixed;
+    width: 100% !important;
+    background: rgba(map-get($colors, primary), .9);
+    color: white;
+    height: 8rem;
+    font-size: 14px !important;
+    transition: background .3s ease;
+    z-index: 5;
+
+    &.transparent {
+        transition: background .3s ease;
+        background: transparent !important;
+    }
+
+    #navWrapper {
+        width: $app-width;
+        margin: 0 auto;
+        padding: 0 7.625rem;
+
+        #logo {
+            width: 10rem;
+            height: 4.8125rem;
+
+            @media screen and (max-width: $break-small) {
+                width: auto;
+                height: 3rem;
+            }
+        }
+
+        .nav-item {
+            display: inline-block;
+            padding: 1rem 1rem .5rem;
+
+            &.employee {
+                width: 9.1875rem;
+                height: 2.8125rem;
+                border: 1px solid map-get($colors, secondary);
+                margin: 0 0 0 1.75rem !important;
+                padding: 0 !important;
+                border-radius: 5px;
+                float: right;
+                transition: background-color .2s linear;
+
+                button {
+                    display: block;
+                    margin: 0 auto;
+                    height: 100%;
+                    border: none;
+                    font-size: .8rem;
+                    background-color: transparent;
+                    color: white;
+                    font-family: 'Montserrat', sans-serif;
+                    cursor: pointer;
+
+                    &:focus {
+                        outline: none !important;
+                    }
+                }
+
+                @media screen and (min-width: $break-medium) {
+                    &:hover {
+                        background-color: rgba(map-get($colors, secondary), .25);
+                        transition: background-color .2s linear;
+                        cursor: pointer;
+                        
+                        button {
+                            color: white;
+                        }    
+                    }
+                }
+
+                &:active {
+                    background-color: rgba(map-get($colors, secondary), .25);
+                    transition: background-color .2s linear;
+                    cursor: pointer;
+                    
+                    button {
+                        color: white;
+                    }
+                }
+            }
+
+            a {
+                display: block;
+                color: white;
+                text-decoration: none;
+                transition: color .2s linear;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .underscore {
+                width: 0;
+                margin: .5rem auto 0;
+                border-bottom: 1px solid map-get($colors, secondary);
+                transition: width .2s ease-in-out;
+            }
+
+            @media screen and (min-width: $break-medium) {
+                &:hover {
+                    a {
+                        color: map-get($colors, secondary);
+                        text-decoration: none;
+                        transition: color .2s linear;
+                    }
+    
+                    .underscore {
+                        width: 100%;
+                    }                
+                }
+            }
+
+            &:active {
+                a {
+                    color: map-get($colors, secondary);
+                    text-decoration: none;
+                    transition: color .2s linear;
+                }
+
+                .underscore {
+                    width: 100%;
+                }
+            }
+        }
+    
+        #mobileMenu i {
+            font-size: 3rem;
+
+            @media screen and (min-width: $break-medium) {
+                display: none;
+            }
+            @media screen and (max-width: $break-small) {
+                font-size: 3rem;
+            }
+        }
+
+
+        @media screen and (max-width: $break-large) {
+            padding: 0 3rem;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            padding: 2rem;
+        }
+
+        @media screen and (max-width: $break-small) {
+            padding: 1.5rem 2rem ;
+        }
+
+        @media screen and (max-width: $break-xsmall) {
+            padding: 1rem;
+        }
+    }
+
+    @media screen and (max-width: $break-small) {
+        height: 7rem;
+    }
+
+    @media screen and (max-width: $break-xsmall) {
+        height: 6rem;
+    }
+}
+
+footer {
+    font-family: 'Montserrat', sans-serif;
+    
+    height: 15.25rem;
+    background-color: map-get($colors, dark);
+    color: white;
+
+    padding: 4.375rem 12rem 0;
+
+    #footerLinks {
+        a {
+            display: inline-block;
+            min-width: 8rem;
+            color: white !important;
+            text-decoration: none !important;
+            text-transform: uppercase;
+            font-size: .75rem;
+            letter-spacing: 2px;
+
+            &.border {
+                border-left: 1px solid white;
+                border-right: 1px solid white;
+            }
+
+            @media screen and (max-width: $break-xsmall) {
+                display: block;
+                min-width: 0;
+                padding: 0 !important;
+                border: none !important;
+                text-align: left !important;
+                margin-top: .4rem;
+            }
+        }
+    }
+
+    #contactInfo {
+        margin-top: 2rem;
+
+        a {
+            display: block;
+            color: map-get($colors, text-grey) !important;
+            text-decoration: none !important;
+            text-transform: uppercase;
+            font-size: .75rem;
+            letter-spacing: 2px;
+        }
+    }
+
+    #socialLinks {
+        margin-top: 1.5rem;
+        img {
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+    }
+
+    #copyright {
+        width: 100%;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid map-get($colors, text-grey);
+
+        span {
+            font-size: .875rem;
+            color: map-get($colors, text-grey);
+            letter-spacing: 2px;
+        }
+    }
+
+    #footerLogoContainer {
+        text-align: right;
+
+        @media screen and (max-width: $break-xsmall) {
+            text-align: left;
+            margin: 1rem 0;
+        }
+    }
+
+    @media screen and (max-width: $break-medium) {
+        padding: 3rem 6rem;
+    }
+
+    @media screen and (max-width: $break-small) {
+        padding: 2rem;
+        height: auto;
+    }
+}
+
+
+
+
+.modal-background {
+    z-index: -1;
+    background-color: map-get($colors, background-grey);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity .5s, z-index .5s;
+
+    &.show {
+        z-index: 99;
+        opacity: .5;
+    }
+}
+
+.modal-container {
+    z-index: -1;
+    height: 60vh;
+    width: 60vw;
+    background: white;
+    position: fixed;
+    top: 20vh;
+    left: 20vw;
+    outline: none;
+
+    opacity: 0;
+    transition: opacity .5s, top .5s, outline .2s, z-index .5s;
+
+    @media screen and (max-width: $break-medium) {
+        height: 75%;
+        width: 75%;
+        top: 12.5%;
+        left: 12.5%;
+    }
+
+    @media screen and (max-width: $break-small) {
+        height: 90%;
+        width: 80%;
+        top: 5%;
+        left: 10%;
+    }
+
+    &.show {
+        z-index: 100;
+        opacity: 1;
+        outline: solid .5rem map-get($colors, primary);
+
+        #logIn {
+            background-color: map-get($colors, primary);
+        }
+    }
+
+    img {
+        height: 8rem;
+    }
+
+    .modal-header {
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: 1px;
+        color: map-get($colors, primary);
+        text-align: center;
+        height: 4rem;
+
+        h1 {
+            margin-bottom: .8rem !important;
+        }
+
+        h6 {
+            margin-top: 0 !important;
+        }
+
+        #modalClose {
+            position: absolute;
+            width: 1.8rem;
+            height: 1.8rem;
+            line-height: 1.8rem;
+            background-color: white;
+            top: -1.3rem;
+            right: -1.3rem;
+            color: map-get($colors, ternary);
+            font-weight: bolder;
+
+            border: solid 4px map-get($colors, ternary);
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            @media screen and (max-width: $break-small) {
+                width: 1.4rem;
+                height: 1.4rem;
+                line-height: 1.4rem;
+                top: -1.2rem;
+                right: -1.2rem;
+                font-size: .9rem;
+            }
+        
+        }
+    }
+
+    #loginContainer {
+        width: 100%;
+        margin: auto;
+
+        input {
+            text-align: center;
+            font-size: .8rem;
+            display: block !important;
+            height: 3rem;
+            width: 75%;
+            padding-left: .5rem;
+            border-radius: 2.5px;
+            border: 1px solid map-get($colors, border-light); 
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+
+            &:first-child {
+                margin-bottom: 1rem;
+            }
+
+            &:focus {
+                outline: none !important;
+            }
+
+            @media screen and (max-width: $break-medium) {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+
+    #logIn {
+        width: 12rem;
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 2.5px;
+        color: white;
+        border: 1px solid white;
+        cursor: pointer;
+        background-color: map-get($colors, primary);
+        transition: background-color 0s, border-color .3s, color .3s, background-color .3s;
+
+        &:focus {
+            outline: none !important;
+        }
+
+        &:active {
+            background-color: white;
+            color: map-get($colors, primary);
+            border-color: map-get($colors, primary);
+        }
+    }
+
+}

@@ -1,0 +1,434 @@
+@import './variables.scss';
+
+/* You can add global styles to this file, and also import other style files */
+html,body {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+:focus {
+    outline: none;
+}
+
+[flex] {
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    
+    &[column] {
+        flex-direction: column !important;
+    
+    }
+    
+    &[row] {
+        flex-direction: row !important;
+    }
+
+    &[align-center] {
+        align-items: center;
+    }
+
+    &[space-between] {
+        justify-content: space-between !important;
+    }
+
+    &[justify-content-end] {
+        justify-content: flex-end !important;
+    }
+
+    &[justify-center] {
+        justify-content: center !important;
+    }
+
+    [col] {
+        position: relative;
+        flex: 1 1 calc(100% / 12);
+        width: calc(100% / 12);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-2] {
+        position: relative;
+        flex: 2 2 calc(100% / 6);
+        width: calc(100% / 6);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-3] {
+        position: relative;
+        flex: 3 3 calc(100% / 4);
+        width: calc(100% / 4);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-4] {
+        position: relative;
+        flex: 4 4 calc(100% / 3);
+        width: calc(100% / 3);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-5] {
+        position: relative;
+        flex: 5 5 calc(100% / 2.4);
+        width: calc(100% / 2.4);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-6] {
+        position: relative;
+        flex: 6 6 calc(100% / 2);
+        width: calc(100% / 2);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-7] {
+        position: relative;
+        flex: 7 7 calc(100% / (12/7));
+        width: calc(100% / (12/7));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-8] {
+        position: relative;
+        flex: 8 8 calc(100% / 1.5);
+        width: calc(100% / 1.5);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-9] {
+        position: relative;
+        flex: 9 9 calc(100% / (12/9));
+        width: calc(100% / (12/9));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-10] {
+        position: relative;
+        flex: 10 10 calc(100% / 1.2);
+        width: calc(100% / 1.2);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-11] {
+        position: relative;
+        flex: 11 11 calc(100% / (12/11));
+        width: calc(100% / (12/11));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    [col-12] {
+        position: relative;
+        flex: 1 1 100%;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+
+    @media screen and (max-width: $break-large) {
+        [col-lg-0] {
+            display: none !important;
+        }
+    
+        [col-lg-1] {
+            flex: 1 1 calc(100% / 12);
+            width: calc(100% / 12);
+        }
+    
+        [col-lg-2] {
+            flex: 2 2 calc(100% / 6);
+            width: calc(100% / 6);
+        }
+    
+        [col-lg-3] {
+            flex: 3 3 calc(100% / 4);
+            width: calc(100% / 4);
+        }
+    
+        [col-lg-4] {
+            flex: 4 4 calc(100% / 3);
+            width: calc(100% / 3);
+        }
+    
+        [col-lg-5] {
+            flex: 5 5 calc(100% / 2.4);
+            width: calc(100% / 2.4);
+        }
+    
+        [col-lg-6] {
+            flex: 6 6 calc(100% / 2);
+            width: calc(100% / 2);
+        }
+    
+        [col-lg-7] {
+            flex: 7 7 calc(100% / (12/7));
+            width: calc(100% / (12/7));
+        }
+    
+        [col-lg-8] {
+            flex: 8 8 calc(100% / 1.5);
+            width: calc(100% / 1.5);
+        }
+    
+        [col-lg-9] {
+            flex: 9 9 calc(100% / (12/9));
+            width: calc(100% / (12/9));
+        }
+    
+        [col-lg-10] {
+            flex: 10 10 calc(100% / 1.2);
+            width: calc(100% / 1.2);
+        }
+    
+        [col-lg-11] {
+            flex: 11 11 calc(100% / (12/11));
+            width: calc(100% / (12/11));
+        }
+    
+        [col-lg-12] {
+            flex: 1 1 100%;
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: $break-medium) {
+        [col] {
+            display: initial !important;
+        }
+        [col-md-0] {
+            display: none !important;
+        }
+
+        [col-md-1] {
+            flex: 1 1 calc(100% / 12);
+            width: calc(100% / 12);
+        }
+    
+        [col-md-2] {
+            flex: 2 2 calc(100% / 6);
+            width: calc(100% / 6);
+        }
+    
+        [col-md-3] {
+            flex: 3 3 calc(100% / 4);
+            width: calc(100% / 4);
+        }
+    
+        [col-md-4] {
+            flex: 4 4 calc(100% / 3);
+            width: calc(100% / 3);
+        }
+    
+        [col-md-5] {
+            flex: 5 5 calc(100% / 2.4);
+            width: calc(100% / 2.4);
+        }
+    
+        [col-md-6] {
+            flex: 6 6 calc(100% / 2);
+            width: calc(100% / 2);
+        }
+    
+        [col-md-7] {
+            flex: 7 7 calc(100% / (12/7));
+            width: calc(100% / (12/7));
+        }
+    
+        [col-md-8] {
+            flex: 8 8 calc(100% / 1.5);
+            width: calc(100% / 1.5);
+        }
+    
+        [col-md-9] {
+            flex: 9 9 calc(100% / (12/9));
+            width: calc(100% / (12/9));
+        }
+    
+        [col-md-10] {
+            flex: 10 10 calc(100% / 1.2);
+            width: calc(100% / 1.2);
+        }
+    
+        [col-md-11] {
+            flex: 11 11 calc(100% / (12/11));
+            width: calc(100% / (12/11));
+        }
+    
+        [col-md-12] {
+            flex: 1 1 100%;
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: $break-small) {
+        [col] {
+            display: initial !important;
+        }
+
+        [col-sm-0] {
+            display: none !important;
+        }
+
+        [col-sm-1] {
+            flex: 1 1 calc(100% / 12);
+            width: calc(100% / 12);
+        }
+    
+        [col-sm-2] {
+            flex: 2 2 calc(100% / 6);
+            width: calc(100% / 6);
+        }
+    
+        [col-sm-3] {
+            flex: 3 3 calc(100% / 4);
+            width: calc(100% / 4);
+        }
+    
+        [col-sm-4] {
+            flex: 4 4 calc(100% / 3);
+            width: calc(100% / 3);
+        }
+    
+        [col-sm-5] {
+            flex: 5 5 calc(100% / 2.4);
+            width: calc(100% / 2.4);
+        }
+    
+        [col-sm-6] {
+            flex: 6 6 calc(100% / 2);
+            width: calc(100% / 2);
+        }
+    
+        [col-sm-7] {
+            flex: 7 7 calc(100% / (12/7));
+            width: calc(100% / (12/7));
+        }
+    
+        [col-sm-8] {
+            flex: 8 8 calc(100% / 1.5);
+            width: calc(100% / 1.5);
+        }
+    
+        [col-sm-9] {
+            flex: 9 9 calc(100% / (12/9));
+            width: calc(100% / (12/9));
+        }
+    
+        [col-sm-10] {
+            flex: 10 10 calc(100% / 1.2);
+            width: calc(100% / 1.2);
+        }
+    
+        [col-sm-11] {
+            flex: 11 11 calc(100% / (12/11));
+            width: calc(100% / (12/11));
+        }
+    
+        [col-sm-12] {
+            flex: 1 1 100%;
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: $break-xsmall) {
+        [col] {
+            display: initial !important;
+        }
+
+        [col-xs-0] {
+            display: none !important;
+        }
+
+        [col-xs-1] {
+            flex: 1 1 calc(100% / 12);
+            width: calc(100% / 12);
+        }
+    
+        [col-xs-2] {
+            flex: 2 2 calc(100% / 6);
+            width: calc(100% / 6);
+        }
+    
+        [col-xs-3] {
+            flex: 3 3 calc(100% / 4);
+            width: calc(100% / 4);
+        }
+    
+        [col-xs-4] {
+            flex: 4 4 calc(100% / 3);
+            width: calc(100% / 3);
+        }
+    
+        [col-xs-5] {
+            flex: 5 5 calc(100% / 2.4);
+            width: calc(100% / 2.4);
+        }
+    
+        [col-xs-6] {
+            flex: 6 6 calc(100% / 2);
+            width: calc(100% / 2);
+        }
+    
+        [col-xs-7] {
+            flex: 7 7 calc(100% / (12/7));
+            width: calc(100% / (12/7));
+        }
+    
+        [col-xs-8] {
+            flex: 8 8 calc(100% / 1.5);
+            width: calc(100% / 1.5);
+        }
+    
+        [col-xs-9] {
+            flex: 9 9 calc(100% / (12/9));
+            width: calc(100% / (12/9));
+        }
+    
+        [col-xs-10] {
+            flex: 10 10 calc(100% / 1.2);
+            width: calc(100% / 1.2);
+        }
+    
+        [col-xs-11] {
+            flex: 11 11 calc(100% / (12/11));
+            width: calc(100% / (12/11));
+        }
+    
+        [col-xs-12] {
+            flex: 1 1 100%;
+            width: 100%;
+        }
+    }
+}
+
+[text-center] {
+    text-align: center !important;
+}
+
+[text-right] {
+    text-align: right !important;
+}

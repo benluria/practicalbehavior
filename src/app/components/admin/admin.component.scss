@@ -1,0 +1,101 @@
+@import '../../../variables.scss';
+
+#adminWrapper {
+    .header {
+        padding: 8rem 3rem 3rem 7.625rem;
+        background-color: map-get($colors, primary);
+        h1 {
+            color: white;
+            font-family: $font;
+            margin: 1.5rem 0 0;
+        }
+    }
+
+    #tileContainer {
+        padding: 1.125rem 8rem;
+
+        .tile {
+            height: calc(8rem + 2px);
+            margin-bottom: 1rem;
+            width: 32%;
+            font-family: $font;
+
+            .tile-inner {
+                padding: 1.5rem;
+                border: 1px solid map-get($colors, primary);
+                overflow: hidden;
+                background-color: white;
+                cursor: pointer;
+                transition: border-bottom .2s,
+                            background-color .2s ease-in-out,
+                            box-shadow .2s ease-in-out;
+
+                &:hover {
+                    border-bottom: 3px solid map-get($colors, ternary);
+                    background-color: map-get($colors, background-light);
+                    transition: border-bottom .2s,
+                                background-color .2s ease-in-out,
+                                box-shadow .2s ease-in-out;
+                }
+
+                h4 {
+                    margin: 1.4rem 0 1.2rem;
+                    color: map-get($colors, dark);
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1.875rem;
+                    line-height: 2.4375rem;
+                    text-align: center;
+                    color: map-get($colors, primary) !important;
+                }
+
+                @media screen and (max-width: $break-large) and (min-width: $break-small) {
+                    padding: .5rem;
+
+                    h4 {
+                        margin: 1.2rem 0 1rem;
+                        font-size: 1.5rem;
+                        line-height: 1.9rem;
+                    }
+                }
+
+                @media screen and (max-width: $break-xsmall) {
+                    padding: .5rem;
+
+                    h4 {
+                        margin: 1.2rem 0 1rem;
+                        font-size: 1.5rem;
+                        line-height: 1.9rem;
+                    }
+                }
+            }
+
+            @media screen and (max-width: $break-large) {
+                height: calc(5rem + 2px);
+            }
+
+            @media screen and (max-width: $break-small) {
+                width: 100%;
+                margin-bottom: 0;
+                height: calc(10rem + 2px);
+            }
+
+            @media screen and (max-width: $break-xsmall) {
+                height: calc(6rem + 2px);
+            }
+            
+            
+        }
+        
+        #spaceHolder {
+            visibility: hidden;
+
+            @media screen and (max-width: $break-small) {
+                display: none;
+            }
+        }
+        @media screen and (max-width: $break-xsmall) {
+            padding: 1.1rem;
+        }
+    }
+
+}

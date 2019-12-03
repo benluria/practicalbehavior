@@ -1,0 +1,116 @@
+@import '../../../variables.scss';
+
+#pageWrapper {
+    min-height: calc(100vh - (15.25rem + 4rem));
+    
+    .header {
+        padding: 8rem 3rem 3rem 7.625rem;
+        background-color: map-get($colors, primary);
+        h1 {
+            color: white;
+            font-family: $font;
+            margin: 0;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            &:hover, &:active, &:focus {
+                color: white;
+            }
+
+            .material-icons {
+                transform: rotate(270deg);
+                display: inline-block;
+            }
+        }
+    }
+
+    #formContainer {
+        margin: 2rem 0 1rem;
+    }
+
+    .content-wrapper {
+        border: 2px solid map-get($colors, primary);
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        font-family: $font;
+        min-height: 1rem;
+
+        transition: all .3s ease-in-out;
+
+        .title {
+            font-weight: bolder; 
+            text-transform: uppercase;
+            color: map-get($colors, primary);
+            cursor: pointer;
+            padding: 1rem;
+            text-align: center;
+            
+            .material-icons {
+                position: absolute;
+                right: 2rem;
+                transform: rotate(270deg);
+    
+                transition: transform .2s;
+            }
+        }
+
+        &:hover {
+            background-color: rgba(map-get($colors, secondary), .5);
+        }
+
+
+        .content {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            padding: 0 2rem;
+
+            .angular-editor-textarea {
+                text-transform: none;
+                color: unset;
+                text-align: unset;
+            }
+        }
+
+        &.show {
+            min-height: 14rem;
+            padding-bottom: 1rem;
+            transition: all .3s ease-in-out;
+
+            &:hover {
+                background-color: white;
+            }
+            
+            .title .material-icons {
+                transform: rotate(180deg);
+                transition: transform .2s;
+            }    
+
+            .content {
+                margin-top: 1rem;
+                opacity: 1;
+                height: auto;
+            }
+
+            .button-row {
+                margin-top: 1rem;
+
+                .save {
+                    float: right;
+                }
+
+                button {
+                    font-size: 1rem;
+                    border-radius: 5px;
+                    padding: .5rem 1rem;
+                }
+            }
+        }
+    }
+
+}
+
+angular-editor {
+    white-space: initial !important;
+}

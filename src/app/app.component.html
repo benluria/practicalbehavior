@@ -1,0 +1,83 @@
+<nav flex [ngClass]="{'transparent': !showHeaderBackground}">
+  <div id="navWrapper" flex row  align-center>
+    <div col-3 col-lg-2>
+      <a [routerLink]="['/']" flex>
+        <img id="logo" src="../assets/images/PBA_logo_white.svg">
+      </a>
+    </div>
+    <div flex justify-content-end
+    col-9 col-md-0 col-lg-10 >
+        <div text-center class="nav-item" *ngFor="let item of navItems">
+          <a [routerLink]="[item.link]">{{item.title}}</a>
+          <div class="underscore"></div>
+        </div>
+
+        <div text-center class="nav-item employee">
+          <button (click)="isLoggedIn ? goToAdmin() : showEmployeeLogin = true;">{{isLoggedIn ? 'Admin Portal' : 'Employee Login'}}</button>
+        </div>
+    </div>
+    <div flex justify-content-end>
+      <div id="mobileMenu" col text-right>
+          <i style="transform: rotate(270deg);" class="material-icons">signal_cellular_alt</i>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer flex row>
+  <div col-9 col-xs-12>
+    <div id="footerLinks">
+      <a [routerLink]="['/referral']" style="padding-right: 1rem;">Submit a Referral</a>
+      <a [routerLink]="['/contact']" text-center class="border">Contact Us</a>
+      <a style="text-align: right; padding-left: 1rem; cursor: pointer;" (click)="showEmployeeLogin = true;">Employee Login</a>
+    </div>
+
+    <div id="contactInfo">
+      <a [href]="'tel:' + footerPhone">{{appContent['Phone']}}</a>
+      <a [href]="'mailto:' + footerEmail">{{appContent['Email']}}</a>
+    </div>
+
+    <div id="socialLinks">
+      <a [href]="appContent['Facebook']">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA0OS4xICg1MTE0NykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+MjgyRTBGQjItNEY3Ni00OEM2LTk2QkItREU4NjQ3NkJGNkE1PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJIb21lcGFnZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3MC4wMDAwMDAsIC0yMDA0LjAwMDAwMCkiIGZpbGw9IiM4MzgzODMiIGlkPSJzb2NpYWwtaWNvbnMiPgogICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNzAuMDAwMDAwLCAyMDA0LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTIwLjE1NSwxMC42NTYgTDE4LjY0OSwxMC42NTcgQzE3LjQ2OCwxMC42NTcgMTcuMjM5LDExLjIxOCAxNy4yMzksMTIuMDQxIEwxNy4yMzksMTMuODU3IEwyMC4wNTYsMTMuODU3IEwxOS42ODksMTYuNzAyIEwxNy4yMzksMTYuNzAyIEwxNy4yMzksMjQgTDE0LjMwMiwyNCBMMTQuMzAyLDE2LjcwMiBMMTEuODQ2LDE2LjcwMiBMMTEuODQ2LDEzLjg1NyBMMTQuMzAyLDEzLjg1NyBMMTQuMzAyLDExLjc2IEMxNC4zMDIsOS4zMjUgMTUuNzg5LDggMTcuOTYsOCBDMTksOCAxOS44OTQsOC4wNzcgMjAuMTU1LDguMTEyIEwyMC4xNTUsMTAuNjU2IFogTTE2LDMyIEwxNiwzMiBDMjQuODM2NTU2LDMyIDMyLDI0LjgzNjU1NiAzMiwxNiBMMzIsMTYgQzMyLDcuMTYzNDQ0IDI0LjgzNjU1NiwtMS42MjMyNDllLTE1IDE2LDAgTDE2LDAgQzcuMTYzNDQ0LDEuNjIzMjQ5ZS0xNSAtMS4wODIxNjZlLTE1LDcuMTYzNDQ0IDAsMTYgTDAsMTYgQzEuMDgyMTY2ZS0xNSwyNC44MzY1NTYgNy4xNjM0NDQsMzIgMTYsMzIgWiIgaWQ9ImZhY2Vib29rIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==">
+      </a>
+      <a [href]="appContent['LinkedIn']">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA0OS4xICg1MTE0NykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+ODdCMTJEODUtOEJGQS00MkJBLTlGMzgtRTE3NzAzRkZEQzkwPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJIb21lcGFnZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIyMi4wMDAwMDAsIC0yMDA0LjAwMDAwMCkiIGZpbGw9IiM4MzgzODMiIGlkPSJzb2NpYWwtaWNvbnMiPgogICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNzAuMDAwMDAwLCAyMDA0LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTc2LDIzLjk4NSBMNzIuNjg1LDIzLjk4NSBMNzIuNjg1LDE4Ljc5NyBDNzIuNjg1LDE3LjU2IDcyLjY2MywxNS45NjkgNzAuOTYyLDE1Ljk2OSBDNjkuMjM3LDE1Ljk2OSA2OC45NzQsMTcuMzE3IDY4Ljk3NCwxOC43MDkgTDY4Ljk3NCwyMy45ODUgTDY1LjY2MiwyMy45ODUgTDY1LjY2MiwxMy4zMTcgTDY4Ljg0LDEzLjMxNyBMNjguODQsMTQuNzc2IEw2OC44ODYsMTQuNzc2IEM2OS4zMjgsMTMuOTM3IDcwLjQxLDEzLjA1MiA3Mi4wMjMsMTMuMDUyIEM3NS4zOCwxMy4wNTIgNzYsMTUuMjYxIDc2LDE4LjEzNCBMNzYsMjMuOTg1IFogTTYxLjkyNCwxMS44NiBDNjAuODU5LDExLjg2IDYwLDEwLjk5OCA2MCw5LjkzNyBDNjAsOC44NzYgNjAuODU5LDguMDE0IDYxLjkyNCw4LjAxNCBDNjIuOTg0LDguMDE0IDYzLjg0NSw4Ljg3NiA2My44NDUsOS45MzcgQzYzLjg0NSwxMC45OTggNjIuOTg0LDExLjg2IDYxLjkyNCwxMS44NiBMNjEuOTI0LDExLjg2IFogTTYzLjU4MiwyMy45ODUgTDYwLjI2MywyMy45ODUgTDYwLjI2MywxMy4zMTcgTDYzLjU4MiwxMy4zMTcgTDYzLjU4MiwyMy45ODUgWiBNNjgsMzIgTDY4LDMyIEM3Ni44MzY1NTYsMzIgODQsMjQuODM2NTU2IDg0LDE2IEw4NCwxNiBDODQsNy4xNjM0NDQgNzYuODM2NTU2LC0xLjYyMzI0OWUtMTUgNjgsMCBMNjgsMCBDNTkuMTYzNDQ0LDEuNjIzMjQ5ZS0xNSA1Miw3LjE2MzQ0NCA1MiwxNiBMNTIsMTYgQzUyLDI0LjgzNjU1NiA1OS4xNjM0NDQsMzIgNjgsMzIgWiIgaWQ9ImxpbmtlZGluIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==">
+      </a>
+    </div>
+  </div>
+  <div col-3 col-xs-12 id="footerLogoContainer">
+    <img id="logo" src="../assets/images/PBA_logo_white.svg">
+  </div>
+  <div id="copyright">
+    <span>© {{year}} Practical Behavior Analysis</span>
+  </div>
+</footer>
+
+
+<div class="modal-background" [ngClass]="{'show': showEmployeeLogin }"></div>
+
+<div class="modal-container" flex column
+  [ngClass]="{'show': showEmployeeLogin }">
+  <div class="modal-header" flex column>
+    <h1>Practical Behavior Analysis</h1>
+    <h6>Employee Login</h6>
+    <span (click)="showEmployeeLogin = false" id="modalClose">X</span>
+  </div>
+  <div flex row>
+    <div col-6 col-md-12 col-xs-0 flex align-center justify-center>
+      <img src="../assets/images/PBA_logo_dark.svg">
+    </div>
+    <div col-6 col-md-12 flex align-center justify-center>
+      <div id="loginContainer">
+        <input type="text" placeholder="Username" [(ngModel)]="username">
+        <input type="password" placeholder="Password" [(ngModel)]="password">
+      </div>
+    </div>
+  </div>
+  <div flex row align-center justify-center style="height: 10%">
+    <button type="button" id="logIn" (click)="login()">Log In</button>
+  </div>
+</div>

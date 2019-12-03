@@ -1,0 +1,29 @@
+<div id="pageWrapper">
+    <div class="header">
+        <a flex row align-center [routerLink]="['/admin']"><i class="material-icons">expand_less</i> Back To Pages</a>
+        <h1>{{page}}</h1>
+    </div>
+
+    <div id="formContainer">
+        <form [formGroup]="appContentForm" *ngIf="appContentForm">
+            <div flex column align-center *ngFor="let item of appContent; let i = index">
+                <div col-8 class="content-wrapper" 
+                    [ngClass]="{'show': activeItem == item}">
+                    <div class="title" (click)="activeItem != item ? activeItem = item : activeItem = null;">
+                        {{item.description}}
+                        <i class="material-icons">expand_less</i>
+                    </div>
+                    
+                    <div class="content">
+                        <angular-editor [id]="i + 'content'" [formControlName]="item.description" [config]="editorConfig"></angular-editor>
+                        <div class="button-row">
+                            <button type="button" class="cancel" (click)="cancelChanges(item)">Clear Changes</button>
+                            <button type="button" class="save" (click)="saveChanges(item)">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

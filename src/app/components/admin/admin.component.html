@@ -1,0 +1,21 @@
+<div id="adminWrapper">
+    <div class="header">
+        <h1>PBA Content Management</h1>
+    </div>
+
+    <div id="tileContainer">
+        <div flex row style="justify-content: space-between;">
+            <div *ngFor="let page of pages" class="tile" (click)="goToPage(page)">
+                <div class="tile-inner">
+                    <h4>{{page}}</h4>
+                </div>
+            </div>
+            <div class="tile" id="spaceHolder">
+                <div class="tile-inner">
+                    <h4>&nbsp;</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
