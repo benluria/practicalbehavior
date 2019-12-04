@@ -76,9 +76,11 @@
             @media screen and (max-width: $break-small) {
                 top: 6.5rem;
 
-                h1 {
-                    font-size: 1.4rem;
-                    line-height: 1.9375rem;
+                #heroHeader {
+                    font-size: 1rem !important;
+                    margin: 0 !important;
+                    line-height: 1.5rem !important;
+                
                 }
 
                 p, .rendered-html {
@@ -102,7 +104,9 @@
                 top: 5.5rem;
                 
                 h1 {
-                    font-size: 1.2rem;
+                    font-size: 1rem !important;
+                    margin: 0 !important;
+                    line-height: 1.5rem !important;
                     width: 100% !important;
                 }
                 
@@ -288,7 +292,7 @@
 
             img {
                 position: absolute;
-                top: -5rem;
+                top: -8rem;
                 left: 2rem;
             }
 
@@ -296,6 +300,5 @@
                 display: none;
             }
         }
-
     }
 }
