@@ -7,11 +7,11 @@ nav {
     color: white;
     height: 8rem;
     font-size: 14px !important;
-    transition: background .3s ease;
+    transition: all .3s ease;
     z-index: 5;
 
     &.transparent {
-        transition: background .3s ease;
+        transition: all .3s ease;
         background: transparent !important;
     }
 
@@ -34,51 +34,31 @@ nav {
             display: inline-block;
             padding: 1rem 1rem .5rem;
 
-            &.employee {
-                width: 9.1875rem;
-                height: 2.8125rem;
+            &.p-top {
+                padding-top: .5rem !important;
+            }
+
+            .referral {
                 border: 1px solid map-get($colors, secondary);
-                margin: 0 0 0 1.75rem !important;
-                padding: 0 !important;
-                border-radius: 5px;
-                float: right;
-                transition: background-color .2s linear;
-
-                button {
-                    display: block;
-                    margin: 0 auto;
-                    height: 100%;
-                    border: none;
-                    font-size: .8rem;
-                    background-color: transparent;
-                    color: white;
-                    font-family: 'Montserrat', sans-serif;
-                    cursor: pointer;
-
-                    &:focus {
-                        outline: none !important;
-                    }
-                }
+                padding: 1rem 2rem;
+                border-radius: 5px;;
+                margin: 0;
+                color: white !important;
+                transition: all .2s linear;
+                // width: 9.1875rem;
+                // height: 2.8125rem;
+                // border: 1px solid map-get($colors, secondary);
+                // margin: 0 0 0 1.75rem !important;
+                // padding: 0 !important;
+                // border-radius: 5px;
+                // float: right;
+                // transition: background-color .2s linear;
 
                 @media screen and (min-width: $break-medium) {
                     &:hover {
                         background-color: rgba(map-get($colors, secondary), .25);
-                        transition: background-color .2s linear;
+                        transition: all .2s linear;
                         cursor: pointer;
-                        
-                        button {
-                            color: white;
-                        }    
-                    }
-                }
-
-                &:active {
-                    background-color: rgba(map-get($colors, secondary), .25);
-                    transition: background-color .2s linear;
-                    cursor: pointer;
-                    
-                    button {
-                        color: white;
                     }
                 }
             }
@@ -87,7 +67,7 @@ nav {
                 display: block;
                 color: white;
                 text-decoration: none;
-                transition: color .2s linear;
+                transition: all .2s linear;
                 font-family: 'Montserrat', sans-serif;
             }
 

@@ -48,16 +48,16 @@ export class AppComponent implements OnInit {
       link: '/aba'
     },
     {
-      title: 'Submit a Referral',
-      link: 'referral'
+      title: 'Resources',
+      link: '/resources'
     },
     {
       title: 'Contact Us',
       link: '/contact'
     },
     {
-      title: 'Resources',
-      link: '/resources'
+      title: 'Submit a Referral',
+      link: 'referral'
     }
   ];
 

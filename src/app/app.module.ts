@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ListContentComponent } from './components/list-content/list-content.component';
+import { ReferralComponent } from './components/referral/referral.component';
 
 import { AuthService } from './services/auth.service';
 import { DialogService } from './services/dialog.service';
@@ -38,7 +39,8 @@ import { CanDeactivateGuard } from './helpers/auth-deactivate';
     AppComponent,
     HomeComponent,
     AdminComponent,
-    ListContentComponent
+    ListContentComponent,
+    ReferralComponent
   ],
   providers: [ 
     AuthService, 

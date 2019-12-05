@@ -1,0 +1,40 @@
+@import '../../../variables.scss';
+
+#header {
+    height: 8rem;
+    width: 100%;
+    background-color: map-get($colors, primary);
+}
+
+#sub1 {
+    height: 5rem;
+    width: 100%;
+    background-color: map-get($colors, secondary);
+}
+
+#pageTitle {
+    margin-top: -2.5rem;
+    width: 40%;
+    background-color: #eeeeee;
+    font-family: $font;
+    letter-spacing: 1px;
+    padding: .25rem 1.5rem;
+    text-transform: uppercase;
+    color: map-get($colors, dark);
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+form {
+    padding: 4rem 12rem;
+    label, input:not([type='checkbox']) {
+        display: block;
+    }
+    
+    .address {
+        div {
+            display: inline-block;
+            width: 50%;
+        }
+    }
+}

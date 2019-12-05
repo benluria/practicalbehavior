@@ -5,6 +5,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from './helpers/auth-guard';
 import { CanDeactivateGuard } from './helpers/auth-deactivate';
 import { ListContentComponent } from './components/list-content/list-content.component';
+import { ReferralComponent } from './components/referral/referral.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     component: ListContentComponent,
     canActivate: [AuthGuard],
     canDeactivate: [CanDeactivateGuard]
+  },
+  {
+    path: 'referral',
+    component: ReferralComponent
   }
 ];
 

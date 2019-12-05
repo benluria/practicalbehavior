@@ -27,8 +27,9 @@ export class HomeComponent implements OnInit {
       let tilesRaw = response[1];
       tilesRaw = tilesRaw.filter(x => x.page == PAGES.home && x.description.indexOf('TILE:') >= 0);
       tilesRaw.forEach(tile => {
-        tile.description = tile.description.replace('TILE:', '');
-        this.tiles.push(tile);
+        const copy = Object.assign({}, tile);
+        copy.description = copy.description.replace('TILE:', '');
+        this.tiles.push(copy);
       });
     });
   }

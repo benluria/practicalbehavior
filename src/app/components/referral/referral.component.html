@@ -1,0 +1,73 @@
+<div id="header"></div>
+<div id="sub1"></div>
+<div id="pageTitle" [innerHTML]="appContent['Title']"></div>
+
+<form flex row>
+    <div col-6 flex row>
+        <div col-6>
+            <label>Name</label>
+            <input type="text" />
+        </div>
+        <div col-6>
+            <label>Date of Birth</label>
+            <input type="date" />
+        </div>
+        <div col-12 class="address">
+            <label>Address</label>
+            <input type="text" />
+            <input type="text" />
+            <label>City</label>
+            <div>
+                <label>State</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label>Zip</label>
+                <input type="text" />
+            </div>
+        </div>
+        <div col-12>
+            <label>Diagnosis</label>
+            <input type="text" />
+        </div>
+    </div>
+    <div col-6 flex row>
+        <div col-6>
+            <label>CONSERVATOR/GUARDIAN (IF NONE, PLEASE CHECK N/A BELOW)</label>
+            <input type="text" />
+            <input type="checkbox" /><span> N/A</span>
+        </div>
+        <div col-12 class="address">
+            <label>Address</label>
+            <input type="text" />
+            <input type="text" />
+            <label>City</label>
+            <div>
+                <label>State</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label>Zip</label>
+                <input type="text" />
+            </div>
+        </div>
+        <div col-6>
+            <label>Phone</label>
+            <input type="text" />
+        </div>
+        <div col-6>
+            <label>Email</label>
+            <input type="text" />
+        </div>
+        <div col-6>
+            <label>PREFERRED METHOD OF CONTACT</label>
+            <div><input type="checkbox"><span> Phone</span></div>
+            <div><input type="checkbox"><span> Email</span></div>
+        </div>
+        <div col-6>
+            <label>PREFERRED TIME OF CONTACT</label>
+            <div><input type="checkbox"><span> AM</span></div>
+            <div><input type="checkbox"><span> PM</span></div>
+        </div>
+    </div>
+</form>

@@ -6,15 +6,13 @@
       </a>
     </div>
     <div flex justify-content-end
+    align-center
     col-9 col-md-0 col-lg-10 >
-        <div text-center class="nav-item" *ngFor="let item of navItems">
-          <a [routerLink]="[item.link]">{{item.title}}</a>
-          <div class="underscore"></div>
+        <div text-center class="nav-item" *ngFor="let item of navItems; let i = index;" [ngClass]="{'p-top': i + 1 == navItems.length}">
+          <a [ngClass]="{'referral' : i + 1 == navItems.length}" [routerLink]="[item.link]">{{item.title}}</a>
+          <div *ngIf="i + 1 < navItems.length" class="underscore"></div>
         </div>
 
-        <div text-center class="nav-item employee">
-          <button (click)="isLoggedIn ? goToAdmin() : showEmployeeLogin = true;">{{isLoggedIn ? 'Admin Portal' : 'Employee Login'}}</button>
-        </div>
     </div>
     <div flex justify-content-end>
       <div id="mobileMenu" col text-right>
@@ -31,7 +29,10 @@
     <div id="footerLinks">
       <a [routerLink]="['/referral']" style="padding-right: 1rem;">Submit a Referral</a>
       <a [routerLink]="['/contact']" text-center class="border">Contact Us</a>
-      <a style="text-align: right; padding-left: 1rem; cursor: pointer;" (click)="showEmployeeLogin = true;">Employee Login</a>
+      <a style="text-align: right; padding-left: 1rem; cursor: pointer;" 
+         (click)="isLoggedIn ? goToAdmin() : showEmployeeLogin = true;"
+         >{{isLoggedIn ? 'Admin Portal' : 'Employee Login'}}
+      </a>
     </div>
 
     <div id="contactInfo">
