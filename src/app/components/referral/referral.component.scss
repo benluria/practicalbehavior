@@ -1,4 +1,5 @@
 @import '../../../variables.scss';
+$section-margin: 1.25rem;
 
 #header {
     height: 8rem;
@@ -15,7 +16,7 @@
 #pageTitle {
     margin-top: -2.5rem;
     width: 40%;
-    background-color: #eeeeee;
+    background-color: map-get($colors, background-grey);
     font-family: $font;
     letter-spacing: 1px;
     padding: .25rem 1.5rem;
@@ -26,15 +27,104 @@
 }
 
 form {
-    padding: 4rem 12rem;
-    label, input:not([type='checkbox']) {
+    padding: 2rem 12rem;
+    label, select, input:not([type='checkbox']), textarea {
         display: block;
+        font-family: $font;
     }
     
-    .address {
-        div {
-            display: inline-block;
-            width: 50%;
+    label {
+        text-transform: uppercase;
+        color: map-get($colors, label);
+        margin-bottom: .25rem;
+        font-size: .9rem;
+        white-space: normal;
+    }
+
+    input:not([type='checkbox']) {
+        height: 1.5rem;
+    }
+
+    input:not([type='checkbox']), select, textarea{
+        border: 1px solid #dedede;
+        border-radius: 2.5px;
+        background-color: #f7f7f7;
+        font-size: 1rem;
+        padding: .4rem .75rem;
+        width: calc(100% - #{$section-margin} * 2);
+    }
+
+    textarea {
+        padding: .75rem !important;
+    }
+
+    .section-inner {
+        margin: $section-margin $section-margin 0 $section-margin;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid map-get($colors, background-grey);
+        
+        &:not(.collapse) {
+            min-height: 12rem;
         }
+    }
+
+    .control-wrapper {
+        margin-bottom: 1rem;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+
+        &:checked ~ span.checkbox {
+            &:before {
+                background: map-get($colors, secondary);
+            }
+    
+            &::after {
+                content: "\2713";
+                color: map-get($colors, primary);
+                position: relative;
+                margin-left: -1rem;
+            }
+        }
+    }
+    
+    span.checkbox {
+        display: inline-block;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            background: white;
+            border: 2px solid map-get($colors, primary);
+            display: inline-block;
+            vertical-align: middle;
+            width: .8rem;
+            height: .8rem;
+            padding: 2px;
+        }
+
+        &:focus {
+            outline: none !important;
+        }
+    }
+
+    button[type="submit"] {
+        font-size: 1.5rem; 
+        width: 50%; 
+        padding: 1rem; 
+        border-radius: 5px; 
+        margin-top: 1rem;
+        background-color: map-get($colors, primary);
+        color: white;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    p {
+        font: $font;
+        text-transform: uppercase;
     }
 }

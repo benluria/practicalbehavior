@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.showHeaderBackground = window.pageYOffset > 50;
+    this.showHeaderBackground = window.pageYOffset > 10;
   };
 
   navItems = [

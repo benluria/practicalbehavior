@@ -3,71 +3,210 @@
 <div id="pageTitle" [innerHTML]="appContent['Title']"></div>
 
 <form flex row>
-    <div col-6 flex row>
-        <div col-6>
-            <label>Name</label>
-            <input type="text" />
-        </div>
-        <div col-6>
-            <label>Date of Birth</label>
-            <input type="date" />
-        </div>
-        <div col-12 class="address">
-            <label>Address</label>
-            <input type="text" />
-            <input type="text" />
-            <label>City</label>
-            <div>
+    <div col-6 class="section">
+        <p>Personal Information</p>
+        <div flex row class="section-inner">
+            <div col-6>
+                <div class="control-wrapper">
+                    <label>Name</label>
+                    <input type="text" />
+                </div>
+            </div>
+            <div col-6>
+                <div class="control-wrapper">
+                    <label>Date of Birth</label>
+                <input type="date"/>
+                </div>
+            </div>
+            <div col-6 class="control-wrapper">
+                <label>Address</label>
+                <input type="text" />            
+            </div>
+            <div col-6 class="control-wrapper">
+                <label>Apt / Suite / Other</label>
+                <input type="text" />            
+            </div>    
+            <div col-4 class="control-wrapper">    
+                <label>City</label>
+                <input type="text" />        
+            </div>
+            <div col-4>
                 <label>State</label>
                 <input type="text" />
             </div>
-            <div>
+            <div col-4>
                 <label>Zip</label>
                 <input type="text" />
             </div>
-        </div>
-        <div col-12>
-            <label>Diagnosis</label>
-            <input type="text" />
+            <div col-12 class="control-wrapper">
+                <label>Diagnosis</label>
+                <textarea rows="2" placeholder="Previous diagnosis and/or behavior issues"></textarea>
+            </div>
         </div>
     </div>
-    <div col-6 flex row>
-        <div col-6>
-            <label>CONSERVATOR/GUARDIAN (IF NONE, PLEASE CHECK N/A BELOW)</label>
-            <input type="text" />
-            <input type="checkbox" /><span> N/A</span>
+
+    <div col-6 class="section">
+        <p>Insurance and Behavior</p>
+        <div flex row class="section-inner">
+            <div col-6 flex row>
+                <div col-9 class="control-wrapper">
+                    <label>Insurance Provider</label>
+                    <select style="display: inline-block; height: 2.5rem; width: 100%;">
+                        <option>Anthem</option>
+                        <option>Kaiser</option>
+                    </select>
+                </div>
+                <div col-3>
+                    <div class="control-wrapper" text-center>
+                        <label>DIDD</label>
+                        <input type="checkbox" />
+                        <span style="margin-top: .5rem;" class="checkbox"></span>
+                    </div>
+                </div>
+            </div>
+            <div col-6>
+                <div class="control-wrapper">
+                    <label>Insurance Number</label>
+                    <input type="text" />
+                </div>
+            </div>
+            <div col-6>
+                <div class="control-wrapper">
+                    <label>Primary Care Physician</label>
+                    <input type="text" />
+                </div>
+            </div>
+            <div col-6>
+                <div class="control-wrapper">
+                    <label>PHYSICIAN Phone</label>
+                    <input type="text" />
+                </div>
+            </div>
+            <div col-12>
+                <div class="control-wrapper">
+                <label style="text-transform: none !important;">List previous treatments for behavior issues and the overall effectiveness of other treatments. If none, please write N/A.</label>
+                <textarea rows="5" placeholder="Speech Therapy, Occupational Therapy, ABA, Informal behavior treatment, medication and effectiveness of treatment"></textarea>
+                </div>
+            </div>
         </div>
-        <div col-12 class="address">
-            <label>Address</label>
+    </div>
+
+    <div col-6 class="section collapse">
+        <div flex row class="section-inner collapse">
+            <div col-12 style="overflow: visible !important;"> <!--ngClass=control-wrapper -->
+                <label style="display: inline;">Person filling out the form</label>
+                <span style="float: right; width: 170px;">
+                    <input type="checkbox" checked="true" />
+                    <span class="checkbox"></span>
+                    <label style="display: inline; padding-left: .5rem;"> Same As Above</label>
+                </span>
+                <!-- <input style="margin-top: .5rem;" type="text" /> -->
+            </div>
+            <!-- <input type="text" />
+            <label>Phone</label>
             <input type="text" />
+            <label>Fax</label>
             <input type="text" />
-            <label>City</label>
-            <div>
+            <label>Email</label>
+            <input type="text" /> -->
+        </div>
+
+        <div flex row class="section-inner collapse">
+            <div col-12 style="overflow: visible !important;"> <!--ngClass=control-wrapper -->
+                <label style="display: inline;">CONSERVATOR/GUARDIAN</label>
+                <span style="float: right; width: 170px;">
+                    <input type="checkbox" checked="true" />
+                    <span class="checkbox"></span>
+                    <label style="display: inline; padding-left: .5rem;"> N/A</label>
+                </span>
+                <!-- <input style="margin-top: .5rem;" placeholder="Full name" type="text" /> -->
+            </div>
+
+            <!-- <div col-6 class="control-wrapper">
+                <label>Phone</label>
+                <input type="text" />
+            </div>
+            <div col-6 class="control-wrapper">
+                <label>Email</label>
+                <input type="text" />
+            </div>
+            
+            <div col-6 class="control-wrapper">
+                <label>Address</label>
+                <input type="text" />            
+            </div>
+            <div col-6 class="control-wrapper">
+                <label>Apt / Suite / Other</label>
+                <input type="text" />            
+            </div>    
+            <div col-4 class="control-wrapper">    
+                <label>City</label>
+                <input type="text" />        
+            </div>
+            <div col-4>
                 <label>State</label>
                 <input type="text" />
             </div>
-            <div>
+            <div col-4>
                 <label>Zip</label>
                 <input type="text" />
             </div>
+
+            <div col-6 class="control-wrapper">
+                <label style="margin-bottom: .5rem;">PREFERRED METHOD OF CONTACT</label>
+                <span>
+                    <input type="checkbox">
+                    <span class="checkbox"></span>
+                    <span> Phone</span>
+                </span>
+                <span style="margin-left: 2rem;">
+                    <input type="checkbox">
+                    <span class="checkbox"></span>
+                    <span> Email</span>
+                </span>
+            </div>
+            <div col-6 class="control-wrapper">
+                <label style="margin-bottom: .5rem;">PREFERRED TIME OF CONTACT</label>
+                <span>
+                    <input type="checkbox">
+                    <span class="checkbox"></span>
+                    <span> AM</span>
+                </span>
+                <span style="margin-left: 2rem;">
+                    <input type="checkbox">
+                    <span class="checkbox"></span>
+                    <span> PM</span>
+                </span>
+            </div> -->
         </div>
-        <div col-6>
-            <label>Phone</label>
-            <input type="text" />
+
+        <div flex row class="section-inner">    
+            <div class="control-wrapper">
+                <label>Description of the behaviors, including frequency (daily, weekly, monthly) and intensity (severe, moderate, minor)</label>
+                <textarea rows="10"  style="margin-top: .4rem;"></textarea>
+            </div>
         </div>
-        <div col-6>
-            <label>Email</label>
-            <input type="text" />
+    </div>
+
+    <div col-6 class="section">
+        <div flex row class="section-inner">
+            <div col-12>
+                <label>BEHAVIORS OF CONCERN (PLEASE SELECT AT LEAST 1)</label>
+                <div *ngFor="let label of checkboxes" class="control-wrapper" style="margin-top: .5rem;">
+                    <input type="checkbox" />
+                    <span class="checkbox"></span>
+                    <label style="display: inline; padding-left: .5rem; text-transform: none !important; font-size: .8rem;"> {{label}}</label>
+                </div>
+                <div class="control-wrapper" style="margin-top: .5rem;">
+                    <input type="checkbox" />
+                    <span class="checkbox"></span>
+                    <label style="display: inline; padding-left: .5rem; text-transform: none !important; font-size: .8rem;"> Other</label>
+                </div>
+            </div>
         </div>
-        <div col-6>
-            <label>PREFERRED METHOD OF CONTACT</label>
-            <div><input type="checkbox"><span> Phone</span></div>
-            <div><input type="checkbox"><span> Email</span></div>
-        </div>
-        <div col-6>
-            <label>PREFERRED TIME OF CONTACT</label>
-            <div><input type="checkbox"><span> AM</span></div>
-            <div><input type="checkbox"><span> PM</span></div>
-        </div>
+    </div>
+
+    <div col-12 text-center>
+        <button type="submit" >Submit</button>
     </div>
 </form>
