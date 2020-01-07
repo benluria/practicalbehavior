@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Connection, Request, TYPES } from 'tedious';
 import * as crypto from 'crypto';
+import createPDF from './referral';
 
 const router = express.Router();
 
@@ -125,6 +126,12 @@ function Login(req, res, next) {
     
     ExecuteSqlQuery(connection, sqlRequest, true);
 }
+//#endregion
+
+//#region REFERRAL
+router.get('/referral', createPDF, (req, res) => {
+    res.json(res.pdfPath);
+});
 //#endregion
 
 //#region HELPERS

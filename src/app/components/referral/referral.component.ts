@@ -12,6 +12,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ReferralComponent implements OnInit {
   appContent: AppContentTable = {};
   checkboxes = [];
+  other = false;
+
+  didd = false;
+  personFillingOutForm = true;
+  
+  guardian = true;
+  guardianPhone = false;
+  guardianEmail = false;
+  guardianAM = false;
+  guardianPM = false;
   
   constructor(private contentService: AppContentService,
               private sanitizer: DomSanitizer) { }
@@ -20,14 +30,34 @@ export class ReferralComponent implements OnInit {
     this.appContent = await this.contentService.getContentForPage(PAGES.referral);
     console.log(this.appContent);
     this.checkboxes = [ 
-      'Physical Aggression (Any instance of harming, or attempting to harm, another individual)',
-      'Self-Injurious Behaviors (Any instance of harming, or attempting to harm, self)',
-      'Property Destruction (Any instance of destroying, or attempting to destroy, property)',
-      'Elopement (Any instance of leaving, or attempting to leave, the supervised area)',
-      'PICA (Any instance of ingesting, or attempting to ingest, inedible objects)',
-      'Tantrum (Any instance of crying, screaming, yelling, throwing things, or falling to the floor)',
-      'Verbal Aggression (Any instance of yelling, screaming, or cursing at another individual)',
-      'Noncompliance (Any instance of not complying with necessary instructions provided by a caregiver)'
+      {
+        label: 'Physical Aggression (Any instance of harming, or attempting to harm, another individual)',
+        checked: false
+      },
+      {
+        label: 'Self-Injurious Behaviors (Any instance of harming, or attempting to harm, self)',
+        checked: false
+      },
+      {
+        label: 'Elopement (Any instance of leaving, or attempting to leave, the supervised area)',
+        checked: false
+      },
+      {
+        label: 'PICA (Any instance of ingesting, or attempting to ingest, inedible objects)',
+        checked: false
+      },
+      {
+        label: 'Tantrum (Any instance of crying, screaming, yelling, throwing things, or falling to the floor)',
+        checked: false
+      },
+      {
+        label: 'Verbal Aggression (Any instance of yelling, screaming, or cursing at another individual)',
+        checked: false
+      },
+      {
+        label: 'Noncompliance (Any instance of not complying with necessary instructions provided by a caregiver)',
+        checked: false
+      }
     ];
   }
 

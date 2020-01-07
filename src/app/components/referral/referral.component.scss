@@ -1,6 +1,16 @@
 @import '../../../variables.scss';
 $section-margin: 1.25rem;
 
+.section p {
+    font-family: $font;
+    text-transform: uppercase;
+    color: #0d0221;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 2rem 0 1.25rem;
+    border-bottom: 1px solid #0d0221;
+}
+
 #header {
     height: 8rem;
     width: 100%;
@@ -72,8 +82,16 @@ form {
         margin-bottom: 1rem;
     }
 
+    .guardian .control-wrapper{
+        display: inline;
+    }
+
     input[type="checkbox"] {
         display: none;
+
+        & ~ label {
+            cursor: pointer;
+        }
 
         &:checked ~ span.checkbox {
             &:before {
@@ -83,7 +101,7 @@ form {
             &::after {
                 content: "\2713";
                 color: map-get($colors, primary);
-                position: relative;
+                position: absolute;
                 margin-left: -1rem;
             }
         }
@@ -121,10 +139,5 @@ form {
         &:hover {
             cursor: pointer;
         }
-    }
-
-    p {
-        font: $font;
-        text-transform: uppercase;
     }
 }

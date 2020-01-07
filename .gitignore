@@ -37,3 +37,6 @@ bazel-bin
 bazel-genfiles
 bazel-testlogs
 bazel-universal
+
+# PDF Folder
+/private
