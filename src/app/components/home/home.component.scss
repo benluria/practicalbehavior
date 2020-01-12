@@ -131,7 +131,7 @@
     }
 
     #tileContainer {
-        padding: 4.125rem;
+        padding: 4.125rem 7.625rem;
 
         .tile {
             width: 48%;
@@ -223,7 +223,7 @@
         background-color: map-get($colors, secondary);
         
         #referralTextContainer {
-            padding: 3.125rem 5rem 4.125rem 4rem;
+            padding: 3.125rem 3rem 2.125rem 7.625rem;
             white-space: normal;
             overflow: auto;
 
@@ -282,7 +282,7 @@
             #typingPic {
                 background-image: url("/assets/images/hands_typing.png");
                 height: 24rem;
-                background-position: top left;
+                background-position: center;
                 background-repeat: no-repeat;
                 background-size: contain;
                 top: -50px;

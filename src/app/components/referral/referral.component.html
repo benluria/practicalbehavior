@@ -32,10 +32,10 @@
             </div>
             <div col-4>
                 <label>State</label>
-                <input type="text" />
+                <input type="text" value="Tennessee" disabled />
             </div>
             <div col-4>
-                <label>Zip</label>
+                <label>Zip Code</label>
                 <input type="text" />
             </div>
             <div col-12 class="control-wrapper">
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div col-6 class="section">
+    <div col-6 class="section right">
         <p>Insurance and Behavior</p>
         <div flex row class="section-inner">
             <div col-6 flex row>
@@ -54,6 +54,7 @@
                     <select style="display: inline-block; height: 2.5rem; width: 100%;">
                         <option>Anthem</option>
                         <option>Kaiser</option>
+                        <option>N/A</option>
                     </select>
                 </div>
                 <div col-3>
@@ -83,9 +84,9 @@
                 </div>
             </div>
             <div col-12>
-                <div class="control-wrapper">
+                <div class="control-wrapper" style="margin-bottom: .8rem !important;">
                 <label style="text-transform: none !important;">List previous treatments for behavior issues and the overall effectiveness of other treatments. If none, please write N/A.</label>
-                <textarea rows="5" placeholder="Speech Therapy, Occupational Therapy, ABA, Informal behavior treatment, medication and effectiveness of treatment"></textarea>
+                <textarea rows="6" placeholder="Speech Therapy, Occupational Therapy, ABA, Informal behavior treatment, medication and effectiveness of treatment"></textarea>
                 </div>
             </div>
         </div>
@@ -193,15 +194,15 @@
         <div flex row class="section-inner">    
             <div class="control-wrapper">
                 <label style="text-transform: none !important;">Description of the behaviors, including frequency (daily, weekly, monthly) and intensity (severe, moderate, minor)</label>
-                <textarea rows="10"  style="margin-top: .4rem;"></textarea>
+                <textarea rows="9" style="margin-top: .4rem;"></textarea>
             </div>
         </div>
     </div>
 
-    <div col-6 class="section">
+    <div col-6 class="section right">
         <div flex row class="section-inner">
             <div col-12>
-                <label>BEHAVIORS OF CONCERN (PLEASE SELECT AT LEAST ONE)</label>
+                <label style="margin-bottom: 1.3rem;">BEHAVIORS OF CONCERN (PLEASE SELECT AT LEAST ONE)</label>
                 <div *ngFor="let box of checkboxes" class="control-wrapper" style="margin-top: .5rem;" (click)="box.checked = !box.checked">
                     <input type="checkbox" [checked]="box.checked" />
                     <span class="checkbox"></span>

@@ -7,8 +7,14 @@ $section-margin: 1.25rem;
     color: #0d0221;
     font-size: 1.3rem;
     font-weight: 500;
-    margin: 0 2rem 0 1.25rem;
+    margin: 0 ($section-margin * 2 + 1rem) 0 0;
     border-bottom: 1px solid #0d0221;
+}
+
+.section.right {
+    p, .section-inner {
+        margin-right: $section-margin !important;
+    }
 }
 
 #header {
@@ -29,7 +35,7 @@ $section-margin: 1.25rem;
     background-color: map-get($colors, background-grey);
     font-family: $font;
     letter-spacing: 1px;
-    padding: .25rem 1.5rem;
+    padding: .25rem 1.5rem .25rem 7.625rem;
     text-transform: uppercase;
     color: map-get($colors, dark);
     font-size: 1.5rem;
@@ -37,7 +43,7 @@ $section-margin: 1.25rem;
 }
 
 form {
-    padding: 2rem 12rem;
+    padding: 2rem 7.625rem;
     label, select, input:not([type='checkbox']), textarea {
         display: block;
         font-family: $font;
@@ -47,7 +53,7 @@ form {
         text-transform: uppercase;
         color: map-get($colors, label);
         margin-bottom: .25rem;
-        font-size: .9rem;
+        font-size: .8rem;
         white-space: normal;
     }
 
@@ -59,7 +65,7 @@ form {
         border: 1px solid #dedede;
         border-radius: 2.5px;
         background-color: #f7f7f7;
-        font-size: 1rem;
+        font-size: .8rem;
         padding: .4rem .75rem;
         width: calc(100% - #{$section-margin} * 2);
     }
@@ -69,7 +75,7 @@ form {
     }
 
     .section-inner {
-        margin: $section-margin $section-margin 0 $section-margin;
+        margin: $section-margin ($section-margin * 2) 0 0;
         padding-bottom: 1rem;
         border-bottom: 2px solid map-get($colors, background-grey);
         

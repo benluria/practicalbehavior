@@ -27,12 +27,21 @@
 <footer flex row>
   <div col-9 col-xs-12>
     <div id="footerLinks">
-      <a [routerLink]="['/referral']" style="padding-right: 1rem;">Submit a Referral</a>
-      <a [routerLink]="['/contact']" text-center class="border">Contact Us</a>
-      <a style="text-align: right; padding-left: 1rem; cursor: pointer;" 
-         (click)="isLoggedIn ? goToAdmin() : showEmployeeLogin = true;"
-         >{{isLoggedIn ? 'Admin Portal' : 'Employee Login'}}
-      </a>
+      <div>
+        <a [routerLink]="['/referral']" style="padding-right: 1rem;">Submit a Referral</a>
+        <div class="underscore"></div>
+      </div>
+      <div>
+        <a [routerLink]="['/contact']" text-center class="border">Contact Us</a>
+        <div class="underscore"></div>
+      </div>
+      <div>
+        <a style="text-align: right; padding-left: 1rem; cursor: pointer;" 
+           (click)="isLoggedIn ? goToAdmin() : showEmployeeLogin = true;"
+           >{{isLoggedIn ? 'Admin Portal' : 'Employee Login'}}
+        </a>
+        <div class="underscore"></div>
+      </div>
     </div>
 
     <div id="contactInfo">
