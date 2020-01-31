@@ -19,6 +19,7 @@ import { ReferralComponent } from './components/referral/referral.component';
 import { AuthService } from './services/auth.service';
 import { DialogService } from './services/dialog.service';
 import { AppContentService } from './services/app-content.service';
+import { ReferralService } from './services/referral.service';
 
 import { AuthGuard } from './helpers/auth-guard';
 import { CanDeactivateGuard } from './helpers/auth-deactivate';
@@ -46,6 +47,7 @@ import { CanDeactivateGuard } from './helpers/auth-deactivate';
     AuthService, 
     DialogService, 
     AppContentService,
+    ReferralService,
     AuthGuard, 
     CanDeactivateGuard 
   ],

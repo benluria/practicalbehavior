@@ -129,7 +129,7 @@ function Login(req, res, next) {
 //#endregion
 
 //#region REFERRAL
-router.get('/referral', createPDF, (req, res) => {
+router.post('/referral', createPDF, (req, res) => {
     res.json(res.pdfPath);
 });
 //#endregion

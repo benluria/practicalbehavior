@@ -4,6 +4,7 @@ import { AppContentService } from 'src/app/services/app-content.service';
 import { PAGES } from 'src/app/models/pages.const';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReferralService } from 'src/app/services/referral.service';
 
 @Component({
   selector: 'app-referral',
@@ -17,20 +18,22 @@ export class ReferralComponent implements OnInit {
   other = false;
 
   didd = false;
-  personFillingOutForm = true;
+  personFillingOutForm = false;
   
-  guardian = true;
+  guardian = false;
   guardianPhone = false;
   guardianEmail = false;
   guardianAM = false;
   guardianPM = false;
   
   constructor(private contentService: AppContentService,
-              private sanitizer: DomSanitizer,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private referralService: ReferralService) { }
 
   async ngOnInit() {
     this.appContent = await this.contentService.getContentForPage(PAGES.referral);
+    await this.getFormInfo();
+    this.createForm();
     console.log(this.appContent);
     this.checkboxes = [ 
       {
@@ -62,6 +65,10 @@ export class ReferralComponent implements OnInit {
         checked: false
       }
     ];
+  }
+
+  async getFormInfo() {
+    const resp = await this.referralService.getInfo();
   }
 
   createForm() {
@@ -105,8 +112,20 @@ export class ReferralComponent implements OnInit {
     });
   }
 
-  submit() {
-    const sanitizedString = this.sanitizer.sanitize(SecurityContext.HTML, '');
+  onSubmit() {
+    if (this.referralService.referralCount > 0) {
+      alert('are you sure?');
+      //show 'are you sure';
+      return;
+    } else if (this.referralService.referralCount > 4) {
+      alert('nah man...');
+      //please try again later (denied)
+      return;
+    }
+
+    const formValues = this.referral.value;
+    console.log(formValues);
+    this.referralService.sendReferral(formValues);
   }
 
 }

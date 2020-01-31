@@ -4,6 +4,7 @@ import * as path from 'path';
 
 
 const createPDF = (req, res, next) => {
+    console.log(req.body.referral);
     const doc = new PDFDocument;
 
     //#region FORM VARIABLES
@@ -11,42 +12,42 @@ const createPDF = (req, res, next) => {
     let referralDate = new Date().toString();
     referralDate = referralDate.substring(0, 16);
 
-    const patientName = req.body.patientName;
-    const patientDOB = req.body.patientDOB;
-    const patientAddress = req.body.patientAddress;
-    const patientPhone = req.body.patientPhone;
-    const cityZip = req.body.cityZip;
-    const diagnosis = req.body.diagnosis;
-    const guardianName = req.body.guardianName;
-    const guardianAddress = req.body.guardianAddress;
-    const guardianZip = req.body.guardianZip;
-    const guardianPhone = req.body.guardianPhone;
-    const guardianEmail = req.body.guardianEmail;
-    const preferredEmail = req.body.preferredEmail;
-    const preferredPhone = req.body.preferredPhone;
-    const preferredAM = req.body.preferredAM;
-    const preferredPM = req.body.preferredPM;
-    const personFillingOut = req.body.personFillingOut;
-    const personFillingPhone = req.body.personFillingPhone;
-    const personFillingEmail = req.body.personFillingEmail;
-    const personFillingFax = req.body.personFillingFax;
-    const insuranceName = req.body.insuranceName;
-    const insuranceNumber = req.body.insuranceNumber;
-    const PCP = req.body.PCP;
-    const PCPPhone = req.body.PCPPhone;
-    const previousTreatment = req.body.previousTreatment;
-    const behaviorsDescription = req.body.behaviorsDescription;
-    const physicalAggression = req.body.physicalAggression;
-    const selfInjurious = req.body.selfInjurious;
-    const propertyDestruction = req.body.propertyDestruction;
-    const elopement = req.body.elopement;
-    const PICA = req.body.PICA;
-    const tantrum = req.body.tantrum;
-    const verbalAggression = req.body.verbalAggression;
-    const noncompliance = req.body.noncompliance;
-    const otherCheckbox = req.body.otherCheckbox;
-    const other = req.body.other;
-    const guardianNotApplicable = req.body.guardianNotApplicable;
+    const patientName = req.body.referral.patientName;
+    const patientDOB = req.body.referral.patientDOB;
+    const patientAddress = req.body.referral.patientAddress;
+    const patientPhone = req.body.referral.patientPhone;
+    const cityZip = req.body.referral.cityZip;
+    const diagnosis = req.body.referral.diagnosis;
+    const guardianName = req.body.referral.guardianName;
+    const guardianAddress = req.body.referral.guardianAddress;
+    const guardianZip = req.body.referral.guardianZip;
+    const guardianPhone = req.body.referral.guardianPhone;
+    const guardianEmail = req.body.referral.guardianEmail;
+    const preferredEmail = req.body.referral.preferredEmail;
+    const preferredPhone = req.body.referral.preferredPhone;
+    const preferredAM = req.body.referral.preferredAM;
+    const preferredPM = req.body.referral.preferredPM;
+    const personFillingOut = req.body.referral.personFillingOut;
+    const personFillingPhone = req.body.referral.personFillingPhone;
+    const personFillingEmail = req.body.referral.personFillingEmail;
+    const personFillingFax = req.body.referral.personFillingFax;
+    const insuranceName = req.body.referral.insuranceName;
+    const insuranceNumber = req.body.referral.insuranceNumber;
+    const PCP = req.body.referral.PCP;
+    const PCPPhone = req.body.referral.PCPPhone;
+    const previousTreatment = req.body.referral.previousTreatment;
+    const behaviorsDescription = req.body.referral.behaviorsDescription;
+    const physicalAggression = req.body.referral.physicalAggression;
+    const selfInjurious = req.body.referral.selfInjurious;
+    const propertyDestruction = req.body.referral.propertyDestruction;
+    const elopement = req.body.referral.elopement;
+    const PICA = req.body.referral.PICA;
+    const tantrum = req.body.referral.tantrum;
+    const verbalAggression = req.body.referral.verbalAggression;
+    const noncompliance = req.body.referral.noncompliance;
+    const otherCheckbox = req.body.referral.otherCheckbox;
+    const other = req.body.referral.other;
+    const guardianNotApplicable = req.body.referral.guardianNotApplicable;
     //#endregion
 
     //#region PDF CONFIG
@@ -161,7 +162,7 @@ const createPDF = (req, res, next) => {
 
     doc.fontSize(8).text(`Street/Apt: ${guardianAddress ? guardianAddress : 'N/A'}`, 55, 228.5);
 
-    doc.fontSize(8).text(`Street/Apt: ${guardianZip ? guardianZip : 'N/A'}`, 320, 228.5);
+    doc.fontSize(8).text(`City/Zip: ${guardianZip ? guardianZip : 'N/A'}`, 320, 228.5);
 
     doc.fontSize(8).text(`Phone: ${guardianPhone ? guardianPhone : ''}`, 55, 243.5);
 
