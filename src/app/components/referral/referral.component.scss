@@ -68,6 +68,10 @@ form {
         font-size: .8rem;
         padding: .4rem .75rem;
         width: calc(100% - #{$section-margin} * 2);
+
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     textarea {
@@ -78,14 +82,17 @@ form {
         margin: $section-margin ($section-margin * 2) 0 0;
         padding-bottom: 1rem;
         border-bottom: 2px solid map-get($colors, background-grey);
-        
-        &:not(.collapse) {
-            min-height: 12rem;
-        }
     }
 
     .control-wrapper {
         margin-bottom: 1rem;
+
+        &.required {
+            > label::after {
+                content: '*';
+                color: map-get($colors, ternary);
+            }
+        }
     }
 
     .guardian .control-wrapper{
@@ -145,5 +152,11 @@ form {
         &:hover {
             cursor: pointer;
         }
+    }
+
+    select {
+        display: inline-block; 
+        height: 2.45rem; 
+        width: 95%;
     }
 }

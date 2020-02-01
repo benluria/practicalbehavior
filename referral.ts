@@ -11,43 +11,7 @@ const createPDF = (req, res, next) => {
     // All form fields are assigned variables here EXCEPT for DIDD, which is not necessary for PDF only for form front end jQuery validation
     let referralDate = new Date().toString();
     referralDate = referralDate.substring(0, 16);
-
-    const patientName = req.body.referral.patientName;
-    const patientDOB = req.body.referral.patientDOB;
-    const patientAddress = req.body.referral.patientAddress;
-    const patientPhone = req.body.referral.patientPhone;
-    const cityZip = req.body.referral.cityZip;
-    const diagnosis = req.body.referral.diagnosis;
-    const guardianName = req.body.referral.guardianName;
-    const guardianAddress = req.body.referral.guardianAddress;
-    const guardianZip = req.body.referral.guardianZip;
-    const guardianPhone = req.body.referral.guardianPhone;
-    const guardianEmail = req.body.referral.guardianEmail;
-    const preferredEmail = req.body.referral.preferredEmail;
-    const preferredPhone = req.body.referral.preferredPhone;
-    const preferredAM = req.body.referral.preferredAM;
-    const preferredPM = req.body.referral.preferredPM;
-    const personFillingOut = req.body.referral.personFillingOut;
-    const personFillingPhone = req.body.referral.personFillingPhone;
-    const personFillingEmail = req.body.referral.personFillingEmail;
-    const personFillingFax = req.body.referral.personFillingFax;
-    const insuranceName = req.body.referral.insuranceName;
-    const insuranceNumber = req.body.referral.insuranceNumber;
-    const PCP = req.body.referral.PCP;
-    const PCPPhone = req.body.referral.PCPPhone;
-    const previousTreatment = req.body.referral.previousTreatment;
-    const behaviorsDescription = req.body.referral.behaviorsDescription;
-    const physicalAggression = req.body.referral.physicalAggression;
-    const selfInjurious = req.body.referral.selfInjurious;
-    const propertyDestruction = req.body.referral.propertyDestruction;
-    const elopement = req.body.referral.elopement;
-    const PICA = req.body.referral.PICA;
-    const tantrum = req.body.referral.tantrum;
-    const verbalAggression = req.body.referral.verbalAggression;
-    const noncompliance = req.body.referral.noncompliance;
-    const otherCheckbox = req.body.referral.otherCheckbox;
-    const other = req.body.referral.other;
-    const guardianNotApplicable = req.body.referral.guardianNotApplicable;
+    const referral = req.body.referral;
     //#endregion
 
     //#region PDF CONFIG
@@ -124,13 +88,13 @@ const createPDF = (req, res, next) => {
     // If the field are entered into the PDF withOUT if/else conditional logic, it is because they are mandatory form fields (see validate.js jQuery file)
     // If the fields are entered into the PDF WITH if/else conditional logic, it is because they are optional
 
-    doc.font('Montserrat').fontSize(8).text(`Individual’s Name: ${patientName}`, 55, 123.5);
+    doc.font('Montserrat').fontSize(8).text(`Individual’s Name: ${referral.patientName}`, 55, 123.5);
     doc.font('Montserrat').fontSize(8).text(`Referral Date: ${referralDate}`, 320, 123.5);
-    doc.font('Montserrat').fontSize(8).text(`Date of Birth: ${patientDOB}`, 55, 138.5);
-    doc.font('Montserrat').fontSize(8).text(`Street/Apt: ${patientAddress ? patientAddress : ''}`, 320, 138.5);
-    doc.font('Montserrat').fontSize(8).text(`Phone: ${patientPhone}`, 55, 153.5);
-    doc.font('Montserrat').fontSize(8).text(`City/Zip: ${cityZip}`, 320, 153.5);
-    doc.font('Montserrat').fontSize(8).text(`Diagnosis: ${diagnosis ? diagnosis : ''}`, 55, 168.5);
+    doc.font('Montserrat').fontSize(8).text(`Date of Birth: ${referral.patientDOB}`, 55, 138.5);
+    doc.font('Montserrat').fontSize(8).text(`Street/Apt: ${referral.patientAddress ? referral.patientAddress : ''} ${referral.patientAddress2 ? ', ' + referral.patientAddress2 : ''}`, 320, 138.5);
+    doc.font('Montserrat').fontSize(8).text(`Phone: ${referral.patientPhone}`, 55, 153.5);
+    doc.font('Montserrat').fontSize(8).text(`City/State/Zip: ${referral.patientCity}, ${referral.patientState}, ${referral.patientZip}`, 320, 153.5);
+    doc.font('Montserrat').fontSize(8).text(`Diagnosis: ${referral.diagnosis ? referral.diagnosis : ''}`, 55, 168.5);
   
     //#endregion
 
@@ -158,19 +122,19 @@ const createPDF = (req, res, next) => {
 
     //#region FILL VALUES BOX 2
     // form rules for guardianName and guardianNotApplicable make it so EITHER one or the other will be present. The code below reflects this fact.
-    doc.fontSize(8).text(`Conservator/Guardian: ${guardianName ? guardianName : 'N/A'}`, 55, 212.5);
+    doc.fontSize(8).text(`Conservator/Guardian: ${referral.guardianName ? referral.guardianName : 'N/A'}`, 55, 212.5);
 
-    doc.fontSize(8).text(`Street/Apt: ${guardianAddress ? guardianAddress : 'N/A'}`, 55, 228.5);
+    doc.fontSize(8).text(`Street/Apt: ${referral.guardianAddress ? referral.guardianAddress : 'N/A'} ${referral.guardianAddress2 ? ', ' + referral.guardianAddress2 : ''}`, 55, 228.5);
 
-    doc.fontSize(8).text(`City/Zip: ${guardianZip ? guardianZip : 'N/A'}`, 320, 228.5);
+    doc.fontSize(8).text(`City/Zip: ${referral.guardianZip ? referral.guardianZip : 'N/A'}`, 320, 228.5);
 
-    doc.fontSize(8).text(`Phone: ${guardianPhone ? guardianPhone : ''}`, 55, 243.5);
+    doc.fontSize(8).text(`Phone: ${referral.guardianPhone ? referral.guardianPhone : ''}`, 55, 243.5);
 
-    doc.fontSize(8).text(`E-Mail: ${guardianEmail ? guardianEmail : ''}`, 320, 243.5);
+    doc.fontSize(8).text(`E-Mail: ${referral.guardianEmail ? referral.guardianEmail : ''}`, 320, 243.5);
 
-    doc.fontSize(8).text(`Preferred Method of Contact:  _${preferredPhone ? 'X' : '_'}_PHONE  _${preferredEmail ? 'X' : '_'}_EMAIL`, 55, 258.5);
+    doc.fontSize(8).text(`Preferred Method of Contact:  _${referral.preferredPhone ? 'X' : '_'}_PHONE  _${referral.preferredEmail ? 'X' : '_'}_EMAIL`, 55, 258.5);
     
-    doc.fontSize(8).text(`Preferred Time of Contact:  _${preferredAM ? 'X' : '_'}_AM  _${preferredPM ? 'X' : '_'}_PM`, 320, 258.5);
+    doc.fontSize(8).text(`Preferred Time of Contact:  _${referral.preferredAM ? 'X' : '_'}_AM  _${referral.preferredPM ? 'X' : '_'}_PM`, 320, 258.5);
     //#endregion
     
     //#region DRAW BOX 3
@@ -194,13 +158,13 @@ const createPDF = (req, res, next) => {
       //#endregion
 
     //#region FILL VALUES BOX 3
-      doc.fontSize(8).text(`Person Filling Out Form (if different from above): ${personFillingOut ? personFillingOut : ''}`, 55, 303.5);
+      doc.fontSize(8).text(`Person Filling Out Form (if different from above): ${referral.personFillingOut ? referral.personFillingOut : ''}`, 55, 303.5);
    
-      doc.fontSize(8).text(`Phone: ${personFillingPhone ? personFillingPhone : ''}`, 55, 318.5);
+      doc.fontSize(8).text(`Phone: ${referral.personFillingPhone ? referral.personFillingPhone : ''}`, 55, 318.5);
       
-      doc.fontSize(8).text(`Fax: ${personFillingFax ? personFillingFax : ''}`, 320, 318.5);
+      doc.fontSize(8).text(`Fax: ${referral.personFillingFax ? referral.personFillingFax : ''}`, 320, 318.5);
     
-      doc.fontSize(8).text(`Email: ${personFillingEmail ? personFillingEmail : ''}`, 55, 333.5);
+      doc.fontSize(8).text(`Email: ${referral.personFillingEmail ? referral.personFillingEmail : ''}`, 55, 333.5);
     //#endregion
 
     //#region DRAW BOX 4
@@ -227,20 +191,16 @@ const createPDF = (req, res, next) => {
 
     //#region FILL VALUES BOX 4
     // The form rule for insurance and DIDD make it so one or the other will be present. The code below reflects this fact
-    doc.fontSize(8).text(`Insurance: ${insuranceName ? insuranceName : 'DIDD'}`, 55, 378.5);
+    doc.fontSize(8).text(`Insurance: ${referral.insuranceName ? referral.insuranceName : referral.insuranceNameOther ? referral.insuranceNameOther : 'DIDD'}`, 55, 378.5);
     
-    doc.fontSize(8).text(`Insurance #: ${insuranceNumber ? insuranceNumber : ''}`, 320, 378.5);
-    
-    doc.fontSize(8).text(`PCP: ${PCP ? PCP : ''}`, 55, 393.5);
-
-    doc.fontSize(8).text(`PCP Phone: ${PCPPhone ? PCPPhone : ''}`, 320, 393.5);
+    doc.fontSize(8).text(`Insurance #: ${referral.insuranceNumber ? referral.insuranceNumber : ''}`, 320, 378.5);
     //#endregion
     
     //#region PREVIOUS TREATMENT / BEHAVIORS OF CONCERN
     doc
       .fontSize(9)
       .text(
-        `List previous treatments for behavior issues (Speech Therapy, Occupational Therapy, ABA, Informal behavior treatment, medication) and the overall effectiveness of other treatments: ${previousTreatment ? previousTreatment : ''}`,
+        `Previous treatments for behavior issues: ***FIX THIS!!!!!***`,
         50,
         430);
 
@@ -249,14 +209,14 @@ const createPDF = (req, res, next) => {
     doc
       .fontSize(9)
       .text(
-        `_${physicalAggression === "on" ? 'Y' : '_'}_ Physical Aggression (Any instance of harming, or attempting to harm, another individual)`,
+        `_${referral.physicalAggression === "on" ? 'Y' : '_'}_ Physical Aggression (Harming, or attempting to harm, another individual)`,
         50,
         505);
 
       doc
         .fontSize(9)
         .text(
-          `_${selfInjurious === "on" ? 'Y' : '_'}_ Self-Injurious Behaviors (Any instance of harming, or attempting to harm, self)`,
+          `_${referral.selfInjurious === "on" ? 'Y' : '_'}_ Self-Injurious Behaviors (Harming, or attempting to harm, self)`,
           50,
           520
         );
@@ -264,7 +224,7 @@ const createPDF = (req, res, next) => {
       doc
         .fontSize(9)
         .text(
-          `_${propertyDestruction === "on" ? 'Y' : '_'}_ Property Destruction (Any instance of destroying, or attempting to destroy, property)`,
+          `_${referral.propertyDestruction === "on" ? 'Y' : '_'}_ Property Destruction (Destroying, or attempting to destroy, property)`,
           50,
           535);
 
@@ -272,7 +232,7 @@ const createPDF = (req, res, next) => {
       doc
         .fontSize(9)
         .text(
-          `_${elopement === "on" ? 'Y' : '_'}_ Elopement (Any instance of leaving, or attempting to leave, the supervised area)`,
+          `_${referral.elopement === "on" ? 'Y' : '_'}_ Elopement (Leaving, or attempting to leave, the supervised area)`,
           50,
           550);
 
@@ -280,14 +240,14 @@ const createPDF = (req, res, next) => {
       doc
         .fontSize(9)
         .text(
-          `_${PICA === "on" ? 'Y' : '_'}_ PICA (Any instance of ingesting, or attempting to ingest, inedible objects)`,
+          `_${referral.PICA === "on" ? 'Y' : '_'}_ PICA (Ingesting, or attempting to ingest, inedible objects)`,
           50,
           565);
     
       doc
         .fontSize(9)
         .text(
-          `_${tantrum === "on" ? 'Y' : '_'}_ Tantrum (Any instance of crying, screaming, yelling, throwing things, or falling to the floor)`,
+          `_${referral.tantrum === "on" ? 'Y' : '_'}_ Tantrum (Crying, screaming, yelling, throwing things, or falling to the floor)`,
           50,
           580
         );
@@ -295,7 +255,7 @@ const createPDF = (req, res, next) => {
       doc
         .fontSize(9)
         .text(
-          `_${verbalAggression === "on" ? 'Y' : '_'}_ Verbal Aggression (Any instance of yelling, screaming, or cursing at another individual)`,
+          `_${referral.verbalAggression === "on" ? 'Y' : '_'}_ Verbal Aggression (Yelling, screaming, or cursing at another individual)`,
           50,
           595
         );
@@ -303,19 +263,19 @@ const createPDF = (req, res, next) => {
       doc
         .fontSize(9)
         .text(
-          `_${noncompliance === "on" ? 'Y' : '_'}_ Noncompliance (Any instance of not complying with necessary instructions provided by a caregiver)`,
+          `_${referral.noncompliance === "on" ? 'Y' : '_'}_ Noncompliance (Not complying with necessary instructions provided by a caregiver)`,
           50,
           610
         );
 
-      doc.fontSize(9).text(`_${otherCheckbox === "on" ? 'Y' : '_'}_ Other (please be specific):`, 50, 625);
+      doc.fontSize(9).text(`_${referral.otherCheckbox === "on" ? 'Y' : '_'}_ Other (please be specific):`, 50, 625);
       doc.moveDown();
-      doc.fontSize(8).text(`${other ? other : ''}`);
+      doc.fontSize(8).text(`${referral.other ? referral.other : ''}`);
 
       doc
         .fontSize(9)
         .text(
-          `Description of the behaviors, including frequency (daily, weekly, monthly) and intensity (severe, moderate, minor): ${behaviorsDescription ? behaviorsDescription : ''}`,
+          `Description of the behaviors, including frequency (daily, weekly, monthly) and intensity (severe, moderate, minor): ${referral.behaviorsDescription ? referral.behaviorsDescription : ''}`,
           50,
           665
         );
