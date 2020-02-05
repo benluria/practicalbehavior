@@ -24,7 +24,6 @@ import { ReferralService } from './services/referral.service';
 import { AuthGuard } from './helpers/auth-guard';
 import { CanDeactivateGuard } from './helpers/auth-deactivate';
 
-
 @NgModule({
   imports: [
     BrowserModule.withServerTransition({ appId: 'practical-behavior' }),
@@ -49,7 +48,7 @@ import { CanDeactivateGuard } from './helpers/auth-deactivate';
     AppContentService,
     ReferralService,
     AuthGuard, 
-    CanDeactivateGuard 
+    CanDeactivateGuard
   ],
   bootstrap: [ AppComponent ]
 })

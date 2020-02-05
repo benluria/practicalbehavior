@@ -57,6 +57,26 @@ form {
         white-space: normal;
     }
 
+    &.submitted {
+        input, textarea, select {
+            &.ng-invalid:not(:focus) {
+                border: 1px solid map-get($colors, ternary);
+            }
+        }
+    }
+
+    input, textarea {
+        &.ng-touched.ng-dirty.ng-invalid:not(:focus) {
+            border: 1px solid map-get($colors, ternary);
+        }
+    }
+
+    .max-count {
+        text-align: right; 
+        color: grey; 
+        padding-right: 1rem;
+    }
+
     input:not([type='checkbox']) {
         height: 1.5rem;
     }
@@ -159,4 +179,23 @@ form {
         height: 2.45rem; 
         width: 95%;
     }
+}
+
+.error-message {
+    color: map-get($colors, ternary);
+    font-family: $font;
+    font-weight: bolder;
+    font-size: 1.1rem;
+    padding: 0 2rem;
+}
+
+.close-btn {
+    font-size: 1.4rem;
+    width: 40%;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-color: map-get($colors, primary);
+    color: white;
+    cursor: pointer;
 }

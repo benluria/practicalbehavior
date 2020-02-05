@@ -4,58 +4,59 @@
 
 <form 
     flex row 
+    [ngClass]="{'submitted': attemptedSubmit}"
     [formGroup]="referral" 
     (ngSubmit)="onSubmit()"
     *ngIf="referral">
 
     <div col-6 class="section">
         <p>Personal Information</p>
-        <div flex row class="section-inner">
+        <div flex row class="section-inner" formGroupName="patient">
             <div col-6>
                 <div class="control-wrapper required">
                     <label>Name</label>
-                    <input type="text" formControlName="patientName" required />
+                    <input type="text" formControlName="name" maxlength="40" required />
                 </div>
             </div>
             <div col-6>
                 <div class="control-wrapper required">
                     <label>Date of Birth</label>
-                <input type="date" formControlName="patientDOB" required />
+                <input type="date" formControlName="dob" required />
                 </div>
             </div>
             <div col-6>
                 <div class="control-wrapper required">
                     <label>Phone</label>
-                    <input type="text" formControlName="patientPhone" />
+                    <input type="text" formControlName="phone" maxlength="25" />
                 </div>
             </div>
             <div col-6>
                 <div class="control-wrapper required">
                     <label>Email</label>
-                    <input type="text" formControlName="patientEmail" />
+                    <input type="email" formControlName="email" email=true maxlength="40" />
                 </div>
             </div>
             <div col-6 class="control-wrapper required">
                 <label>Address</label>
-                <input type="text" formControlName="patientAddress" required />
+                <input type="text" formControlName="address" maxlength="40" required />
             </div>
             <div col-6 class="control-wrapper">
                 <label>Apt / Suite / Other</label>
-                <input type="text" formControlName="patientAddress2" />
+                <input type="text" formControlName="address2" maxlength="25" />
             </div>    
             <div col-4 class="control-wrapper required">    
                 <label>City</label>
-                <input type="text" formControlName="patientCity" required />        
+                <input type="text" formControlName="city" required maxlength="30" />        
             </div>
             <div col-4 class="control-wrapper required">
                 <label>State</label>
-                <select formControlName="patientState" required>
+                <select formControlName="state" required>
                     <option selected>Tenessee</option>
                 </select>
             </div>
             <div col-4 class="control-wrapper required">
                 <label>Zip Code</label>
-                <input type="text" formControlName="patientZip" required />
+                <input type="text" formControlName="zip" required maxlength="10" />
             </div>
             <div col-12 class="control-wrapper required">
                 <label>Diagnosis</label>
@@ -63,79 +64,81 @@
                     rows="2" 
                     placeholder="Previous diagnosis and/or behavior issues"
                     formControlName="diagnosis"
+                    maxlength="175"
                     required>
                 </textarea>
+                <div class="max-count"><small>{{diagnosisCount || 0}}/175</small></div>
             </div>
         </div>
         
-        <div flex row class="section-inner collapse">
-            <div col-12 style="overflow: visible !important;" (click)="handleCheckboxChange(referral.get('guardianNotApplicable'))">
+        <div flex row class="section-inner collapse" formGroupName="guardian">
+            <div col-12 style="overflow: visible !important;" (click)="handleCheckboxChange(referral.get('guardian.notApplicable'))">
                 <label style="display: inline;">CONSERVATOR/GUARDIAN</label>
                 <span style="float: right; width: 170px;">
-                    <input type="checkbox" [checked]="referral.value.guardianNotApplicable" />
+                    <input type="checkbox" [checked]="referral.value.guardian.notApplicable" />
                     <span class="checkbox"></span>
                     <label style="display: inline; padding-left: .5rem;"> None</label>
                 </span>
             </div>
-            <div col-12 flex row *ngIf="!referral.value.guardianNotApplicable" class="guardian" style="margin-top: .5rem;">
+            <div col-12 flex row *ngIf="!referral.value.guardian.notApplicable" class="guardian" style="margin-top: .5rem;">
                 <div col-12 class="control-wrapper required">
                     <label>Name</label>
-                    <input type="text" formControlValue="guardianName" />
+                    <input type="text" formControlName="name" maxlength="40" />
                 </div>
                 <div col-6 class="control-wrapper required">
                     <label>Phone</label>
-                    <input type="text" formControlName="guardianPhone" />
+                    <input type="text" formControlName="phone" maxlength="25" />
                 </div>
                 <div col-6 class="control-wrapper required">
                     <label>Email</label>
-                    <input type="text"  formControlName="guardianEmail" />
+                    <input type="email"  formControlName="email" email="true" maxlength="40" />
                 </div>
                 
                 <div col-6 class="control-wrapper">
                     <label>Address</label>
-                    <input type="text" formControlName="guardianAddress" />
+                    <input type="text" formControlName="address" maxlength="40" />
                 </div>
                 <div col-6 class="control-wrapper">
                     <label>Apt / Suite / Other</label>
-                    <input type="text" formControlName="guardianAddress2" />
+                    <input type="text" formControlName="address2" maxlength="40" />
                 </div>    
                 <div col-4 class="control-wrapper">    
                     <label>City</label>
-                    <input type="text" formControlName="guardianCity" />        
+                    <input type="text" formControlName="city" maxlength="30" />        
                 </div>
                 <div col-4 class="control-wrapper">
                     <label>State</label>
-                    <select formControlName="guardianState" required>
+                    <select formControlName="state">
                         <option selected>Tenessee</option>
                     </select>
                 </div>
                 <div col-4>
                     <label>Zip</label>
-                    <input type="text" formControlName="guardianZip" />
+                    <input type="text" formControlName="zip" maxlength="10" />
                 </div>
     
                 <div col-6 class="control-wrapper required">
                     <label style="margin-bottom: .5rem; font-size: .75rem;">PREFERRED METHOD OF CONTACT</label>
-                    <span (click)="handleCheckboxChange(referral.get('preferredPhone'))">
-                        <input type="checkbox" [checked]="referral.value.preferredPhone">
+                    <span (click)="handleCheckboxChange(referral.get('guardian.preferredPhone'))">
+                        <input type="checkbox" [checked]="referral.value.guardian.preferredPhone">
                         <span class="checkbox"></span>
                         <label style="display: inline; font-size: .75rem;"> Phone</label>
                     </span>
-                    <span style="margin-left: 2rem;" (click)="handleCheckboxChange(referral.get('preferredEmail'))">
-                        <input type="checkbox" [checked]="referral.value.preferredEmail">
+                    <span style="margin-left: 2rem;" (click)="handleCheckboxChange(referral.get('guardian.preferredEmail'))">
+                        <input type="checkbox" [checked]="referral.value.guardian.preferredEmail">
                         <span class="checkbox"></span>
                         <label style="display: inline; font-size: .75rem;"> Email</label >
                     </span>
                 </div>
                 <div col-6 class="control-wrapper required">
                     <label style="margin-bottom: .5rem; margin-left: .5rem; font-size: .75rem;">PREFERRED TIME OF CONTACT</label>
-                    <span style="margin-left: .5rem;" (click)="handleCheckboxChange(referral.get('preferredAM'))">
-                        <input type="checkbox" [checked]="referral.value.preferredAM">
+                    <span style="margin-left: .5rem;" (click)="handleCheckboxChange(referral.get('guardian.preferredAM'))">
+                        <input type="checkbox" [checked]="referral.value.guardian.preferredAM">
                         <span class="checkbox"></span>
                         <label style="display: inline; font-size: .75rem;"> AM</label>
                     </span>
-                    <span style="margin-left: 2rem;" (click)="handleCheckboxChange(referral.get('preferredPM'))">
-                        <input type="checkbox" [checked]="referral.value.preferredPM">
+                    <span style="margin-left: 2rem;" (click)="handleCheckboxChange(referral.get('guardian.preferredPM'))">
+                        <input type="checkbox" [checked]="referral.value.guardian.preferredPM">
                         <span class="checkbox"></span>
                         <label style="display: inline; font-size: .75rem;"> PM</label>
                     </span>
@@ -143,31 +146,31 @@
             </div>
         </div>
 
-        <div flex row class="section-inner collapse">
-            <div col-12 style="overflow: visible !important;" (click)="personFillingOutForm = !personFillingOutForm">
+        <div flex row class="section-inner collapse" formGroupName="otherPerson">
+            <div col-12 style="overflow: visible !important;" (click)="handleCheckboxChange(referral.get('otherPerson.notApplicable'))">
                 <label style="display: inline;">Person filling out the form</label>
                 <span style="float: right; width: 170px;">
-                    <input type="checkbox" [checked]="personFillingOutForm" />
+                    <input type="checkbox" [checked]="referral.value.otherPerson.notApplicable" />
                     <span class="checkbox"></span>
                     <label style="display: inline; padding-left: .5rem;"> Same As Above</label>
                 </span>
             </div>
-            <div flex row col-12 style="margin-top: .5rem;" *ngIf="!personFillingOutForm">
+            <div flex row col-12 style="margin-top: .5rem;" *ngIf="!referral.value.otherPerson.notApplicable">
                 <div col-6 class="control-wrapper">
                     <label>Name</label>
-                    <input type="text" formControlName="personFillingOut" />
+                    <input type="text" formControlName="name" maxlength="40" />
                 </div>
                 <div col-6 class="control-wrapper">
                     <label>Phone</label>
-                    <input type="text" formControlName="personFillingPhone" />
+                    <input type="text" formControlName="phone" maxlength="25" />
                 </div>
                 <div col-6 class="control-wrapper">
                     <label>Fax</label>
-                    <input type="text" formControlName="personFillingFax" />
+                    <input type="text" formControlName="fax" max="25" />
                 </div>
                 <div col-6 class="control-wrapper">
                     <label>Email</label>
-                    <input type="text" formControlName="personFillingEmail" />
+                    <input type="email" formControlName="email" email="true" maxlength="40" />
                 </div>
             </div>
         </div>
@@ -175,11 +178,11 @@
 
     <div col-6 class="section right">
         <p>REFERRAL INFORMATION</p>
-        <div flex row class="section-inner" style="padding-bottom: .2rem">
+        <div flex row class="section-inner" style="padding-bottom: .2rem" formGroupName="insurance">
             <div col-6>
                 <div class="control-wrapper">
                     <label>Insurance Number</label>
-                    <input type="text" formControlName="insuranceNumber" required />
+                    <input type="text" formControlName="number" maxlength="30" />
                 </div>
             </div>
             <div col-6 flex row>
@@ -187,7 +190,7 @@
                     <label>Insurance Provider</label>
                     <select 
                         style="width: 100%"
-                        formControlName="insuranceName">
+                        formControlName="name">
                         <option selected>Select A Provider</option>
                         <option>Anthem</option>
                         <option>Kaiser</option>
@@ -202,43 +205,43 @@
                     </div>
                 </div>
             </div>
-            <div col-6 class="control-wrapper required" *ngIf="referral.value.insuranceName == 'other' && !didd">
+            <div col-6 class="control-wrapper required" *ngIf="referral.value.insurance.name == 'other' && !didd">
                 <label>Insurance Provider (Other)</label>
-                <input type="text" formControlName="insuranceNameOther" />
+                <input type="text" formControlName="nameOther" maxlength="75" />
             </div>
         </div>
 
-        <div flex row class="section-inner" style="padding-bottom: 0;">
+        <div flex row class="section-inner" style="padding-bottom: 0;" formGroupName="previousTreatmentBoxes">
             <div col-12>
                 <div class="control-wrapper">
                     <label>PREVIOUS TREATMENTS FOR BEHAVIOR ISSUES</label>
                     <div flex row>
-                        <div col-6 *ngFor="let box of treatmentCheckboxes" class="control-wrapper" style="margin: .5rem auto;" (click)="behaviorCheckboxChange(box)">
-                            <input type="checkbox" [checked]="box.checked" (change)="behaviorCheckboxChange(box)" />
+                        <div col-6 *ngFor="let box of treatmentCheckboxes" class="control-wrapper" style="margin: .5rem auto;" (click)="behaviorCheckboxChange(box, 'previousTreatmentBoxes')">
+                            <input type="checkbox" [checked]="box.checked" />
                             <span class="checkbox"></span>
                             <label style="display: inline; padding-left: .5rem; text-transform: none !important; font-size: .8rem;"> {{box.label}}</label>
                         </div>
                     </div>
                 </div>
-                <div col-12 class="control-wrapper required" *ngIf="referral.value.otherTreatmentCheckbox" style="padding-bottom: .5rem;">
+                <div col-12 class="control-wrapper required" *ngIf="referral.value.previousTreatmentBoxes.otherTreatmentCheckbox" style="padding-bottom: .5rem;">
                     <label>Description of Treatment</label>
-                    <input type="text" formControlName="otherTreatment" />
+                    <input type="text" formControlName="otherTreatment" maxlength="90" />
                 </div>
             </div>
         </div>
 
-        <div flex row class="section-inner" style="padding-bottom: .5rem">
+        <div flex row class="section-inner" style="padding-bottom: .5rem" formGroupName="behaviorBoxes">
             <div col-12 class="control-wrapper required" style="margin-bottom: 0 !important">
                 <label style="margin-bottom: 1.3rem;">BEHAVIORS OF CONCERN (PLEASE SELECT AT LEAST ONE)</label>
-                <div *ngFor="let box of behaviorCheckboxes" class="control-wrapper" style="margin-top: .5rem;" (click)="behaviorCheckboxChange(box)">
+                <div *ngFor="let box of behaviorCheckboxes" class="control-wrapper" style="margin-top: .5rem;" (click)="behaviorCheckboxChange(box, 'behaviorBoxes')">
                     <input type="checkbox" [checked]="box.checked" />
                     <span class="checkbox"></span>
                     <label style="display: inline; padding-left: .5rem; text-transform: none !important; font-size: .8rem;"> {{box.label}}</label>
                 </div>
             </div>
-            <div col-12 class="control-wrapper required" *ngIf="referral.value.otherCheckbox" style="padding-bottom: .5rem;">
+            <div col-12 class="control-wrapper required" *ngIf="referral.value.behaviorBoxes.otherCheckbox" style="padding-bottom: .5rem;">
                 <label>Description of Behavior</label>
-                <input type="text" formControlName="other" />
+                <input type="text" formControlName="other" maxlength="90" />
             </div>
         </div>
 
@@ -247,13 +250,30 @@
                 <label style="text-transform: none !important;">Description of the behaviors, including frequency (daily, weekly, monthly) and intensity (severe, moderate, minor)</label>
                 <textarea 
                     rows="6"
-                    style="margin-top: .4rem;">
+                    maxlength="175"
+                    style="margin-top: .4rem;"
+                    formControlName="behaviorsDescription">
                 </textarea>
+                <div class="max-count"><small>{{behaviorsDescriptionCount || 0}}/175</small></div>
             </div>
         </div>
     </div>
 
     <div col-12 text-center>
-        <button type="submit" [disabled]="!referral.valid" >Submit</button>
+        <button type="submit">Submit</button>
     </div>
 </form>
+
+<div class="modal-background" [ngClass]="{'show': showErrorModal }"></div>
+<div class="modal-container small" [ngClass]="{'show': showErrorModal }">
+  <div class="modal-header" flex column>
+      <h1>Whoops!</h1>
+    <span (click)="showErrorModal = false" id="modalClose">X</span>
+  </div>
+  <div flex row align-center style="height: 50%; text-align: center;">
+    <p class="error-message">Please fill out all of the required fields before submitting.</p>
+  </div>
+  <div flex row align-center justify-center>
+      <button class="close-btn" (click)="showErrorModal = false">OK</button>
+  </div>
+</div>
