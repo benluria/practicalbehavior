@@ -38,6 +38,7 @@
     "core-js": "^2.5.4",
     "crypto": "^1.0.1",
     "libphonenumber-js": "^1.7.38",
+    "mailgun-js": "^0.22.0",
     "pdfkit": "^0.11.0",
     "rxjs": "^6.5.1",
     "tedious": "^6.6.0",

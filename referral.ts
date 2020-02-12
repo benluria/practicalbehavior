@@ -1,6 +1,10 @@
 import PDFDocument from 'pdfkit';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as _mailgun from 'mailgun-js';
+const mailgun_domain = "practicalbehavior.com";
+const mailgun_key = "key-98d8bfc43a977f6b68dc9806a743b3c0";
+
 
 
 const createPDF = (req, res, next) => {
@@ -23,25 +27,32 @@ const createPDF = (req, res, next) => {
     var writeStream = fs.createWriteStream(fileName);
 
     writeStream.on("finish", function() {
-        // var file = fs.readFileSync(fileName);
+        var file = fs.readFileSync(fileName);
         
-        // var attch = new mailgun.Attachment({
-        //   data: file,
-        //   filename: filename,
-        //   contentType: "application/pdf"
-        // });
-        // var data = {
-        //   from: "office@practicalbehavior.com",
-        //   to: "zstevens@practicalbehavior.com",
-        //   subject: "New Referral",
-        //   text: "New Referral",
-        //   attachment: attch
-        // };
+        var mailgun = new _mailgun({apiKey: mailgun_key, domain: mailgun_domain});
+
+        var attch = new mailgun.Attachment({
+          data: file,
+          filename: fileName,
+          contentType: "application/pdf"
+        });
+
+        var data = {
+          from: "office@practicalbehavior.com",
+          // to: "zstevens@practicalbehavior.com",
+          to: 'benjlur@me.com',
+          subject: "New Referral",
+          text: "New Referral",
+          attachment: attch
+        };
   
-        // mailgun.messages().send(data, function(error, body) {
-        //   console.log("ERROR" + error);
-        //   console.log("BODY" + JSON.stringify(body));
-        // });
+        mailgun.messages().send(data, function(error, body) {
+          console.log("ERROR" + error);
+          console.log("BODY" + JSON.stringify(body));
+          fs.unlink(fileName, (err) => {
+            console.error(err);
+          })
+        });
       });
 
     doc.pipe(writeStream);
@@ -55,7 +66,7 @@ const createPDF = (req, res, next) => {
 
     doc.font('Montserrat').fontSize(8).text("Phone: (615) 669-6397", 415, 35);
     doc.font('Montserrat').fontSize(8).text("Fax: (615) 915-2663", 415, 50);
-    doc.font('Montserrat-Bold').fontSize(8).text(`Date: ${referralDate}`);
+    doc.font('Montserrat-Bold').fontSize(8).text(`Date: ${referralDate}`, 415, 65);
 
     doc.font('Montserrat-Bold').fontSize(11).text("Referral For Behavior Analysis Services", 200, 90);
     // #endregion
@@ -163,7 +174,7 @@ const createPDF = (req, res, next) => {
     .moveTo(50, 375)
 
     // 1. Create Box; This rectangle will be 500 by 30 - only two 15px rows
-    .rect(50, 375, 500, 30)
+    .rect(50, 360, 500, 30)
 
     // .lineTo(500, 375)
     // .lineTo(500, 405)
@@ -171,20 +182,20 @@ const createPDF = (req, res, next) => {
     // .lineTo(100, 375)
 
     // 2. Create rows -- 2
-    .moveTo(50, 390)
-    .lineTo(550, 390)
+    .moveTo(50, 375)
+    .lineTo(550, 375)
 
     // 3. Line down middle
-    .moveTo(315, 375)
-    .lineTo(315, 390)
+    .moveTo(315, 360)
+    .lineTo(315, 375)
     .stroke();
     //#endregion
 
     //#region FILL VALUES BOX 4
     // The form rule for insurance and DIDD make it so one or the other will be present. The code below reflects this fact
-    doc.fontSize(8).text(`Insurance: ${referral.insurance.name ? referral.insurance.name : referral.insurance.nameOther ? referral.insurance.nameOther : 'DIDD'}`, 55, 378.5);
-    doc.fontSize(8).text(`Insurance #: ${referral.insurance.number ? referral.insurance.number : ''}`, 320, 378.5);
-    doc.fontSize(8).text(`Insurance (Other): ${referral.insurance.nameOther ? referral.insurance.nameOther : ''}`, 55, 393.5);
+    doc.fontSize(8).text(`Insurance: ${referral.insurance.name ? referral.insurance.name : referral.insurance.nameOther ? referral.insurance.nameOther : 'DIDD'}`, 55, 363.5);
+    doc.fontSize(8).text(`Insurance #: ${referral.insurance.number ? referral.insurance.number : ''}`, 320, 363.5);
+    doc.fontSize(8).text(`Insurance (Other): ${referral.insurance.nameOther ? referral.insurance.nameOther : ''}`, 55, 378.5);
     //#endregion
     
     //#region PREVIOUS TREATMENT
@@ -193,49 +204,49 @@ const createPDF = (req, res, next) => {
       .text(
         `Previous treatments for behavior issues:`,
         50,
-        415);
+        400);
 
     doc
       .fontSize(9)
       .text(
         `_${referral.previousTreatmentBoxes.speechTherapy ? 'Y': '_'}_ Speech Therapy`,
       50,
-      430);
+      415);
 
     doc
       .fontSize(9)
       .text(
         `_${referral.previousTreatmentBoxes.occupationalTherapy ? 'Y': '_'}_ Occupational Therapy`,
       350,
-      430);
+      415);
 
     doc
       .fontSize(9)
       .text(
         `_${referral.previousTreatmentBoxes.aba ? 'Y': '_'}_ ABA`,
       50,
-      445);
+      430);
 
     doc
       .fontSize(9)
       .text(
         `_${referral.previousTreatmentBoxes.informalTreatment ? 'Y': '_'}_ Informal Treatment`,
       350,
-      445);
+      430);
     
     doc
       .fontSize(9)
       .text(
         `_${referral.previousTreatmentBoxes.medication ? 'Y': '_'}_ Medication`,
       50,
-      460);
+      445);
         
     doc
       .fontSize(9)
       .text(
         `_${referral.previousTreatmentBoxes.otherTreatmentCheckbox ? 'Y': '_'}_ Other`,
       350,
-      460);
+      445);
 
     if (referral.previousTreatmentBoxes.otherTreatmentCheckbox) {
       doc
@@ -243,7 +254,7 @@ const createPDF = (req, res, next) => {
         .text(
           `Description of Previous Treatment: ${referral.previousTreatmentBoxes.otherTreatment}`,
         50,
-        475);
+        460);
     }
 
     //#endregion
