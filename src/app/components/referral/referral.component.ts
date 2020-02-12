@@ -209,7 +209,8 @@ export class ReferralComponent implements OnInit {
       }),
       //#endregion
 
-      behaviorsDescription: ['', [Validators.required, Validators.maxLength(175)]]
+      behaviorsDescription: ['', [Validators.required, Validators.maxLength(175)]],
+      recaptcha: false
     }
     // , {validator: this.checkDate('patientDOB')}
     );
@@ -336,6 +337,13 @@ export class ReferralComponent implements OnInit {
       this.referral.get('insurance.name').enable();
       this.referral.get('insurance.number').enable();
     }
+  }
+
+  async resolved(token: string) {
+    console.log(token);
+    const resp = await this.referralService.validateRecaptcha(token);
+    this.referral.get('recaptcha').patchValue(resp && resp.success);
+    console.log(resp);
   }
 
 }

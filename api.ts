@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Connection, Request, TYPES } from 'tedious';
 import * as crypto from 'crypto';
+import * as request from 'request';
 import createPDF from './referral';
 
 const router = express.Router();
@@ -132,6 +133,31 @@ function Login(req, res, next) {
 router.post('/referral', createPDF, (req, res) => {
     res.json(res.pdfPath);
 });
+
+router.post('/recaptcha', (req, res) => {
+    const token = req.body.recaptcha;
+    const secretKey = "6LfXN3UUAAAAADbMsJT0zVE5Gv_P_E1xGmIdwGSa";
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}&remoteip=${req.connection.remoteAddress}`;
+
+    if(token === null || token === undefined){
+        res.status(201).send({success: false, message: "Token is empty or invalid"});
+        return console.log("token empty");
+    }  
+    
+    request(url, function(err, response, body){
+    //the body is the data that contains success message
+    body = JSON.parse(body);
+    
+    //check if the validation failed
+    if(body.success !== undefined && !body.success) {
+            res.send({success: false, 'message': "recaptcha failed"});
+            return console.log("failed");
+        }
+    
+    //if passed response success message to client
+        res.send({"success": true, 'message': "recaptcha passed"});
+    });
+})
 //#endregion
 
 //#region HELPERS

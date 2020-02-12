@@ -23,6 +23,7 @@ import { ReferralService } from './services/referral.service';
 
 import { AuthGuard } from './helpers/auth-guard';
 import { CanDeactivateGuard } from './helpers/auth-deactivate';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   imports: [
@@ -33,7 +34,9 @@ import { CanDeactivateGuard } from './helpers/auth-deactivate';
     TransferHttpCacheModule,
     BrowserTransferStateModule,
     AngularEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RecaptchaModule,  //this is the recaptcha main module
+    RecaptchaFormsModule, //this is the module for form incase form validation
   ],
   declarations: [
     AppComponent,

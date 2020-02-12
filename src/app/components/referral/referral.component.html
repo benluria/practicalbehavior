@@ -259,9 +259,13 @@
         </div>
     </div>
 
-    <!-- <div col-12 text-center>
-        <div nbRecaptcha key="public key" formControlName="captcha"></div>
-    </div> -->
+    <div col-12 text-center>
+        <re-captcha (resolved)="resolved($event)" 
+            formControlName="recaptcha" 
+            siteKey="6LfXN3UUAAAAAMzQWKuyb_tNmkWgtV2HgU2gsnuh"
+            style="display: inline-block; margin-top: 1.5rem;">  
+        </re-captcha>
+    </div>
 
     <div col-12 text-center>
         <button type="submit">Submit</button>

@@ -24,5 +24,14 @@ export class ReferralService {
         //insurance
         //
     }
+
+    async validateRecaptcha(token: string): Promise<any> {
+        try {
+            const resp = await this.http.post(`${environment.apiUrl}/recaptcha`, {recaptcha: token}).toPromise();
+            return resp;
+        } catch (err) {
+            console.error(err);
+        }
+    }
     
 }

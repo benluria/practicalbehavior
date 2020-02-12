@@ -1,19 +1,23 @@
 @import '../../../variables.scss';
 $section-margin: 1.25rem;
 
-.section p {
-    font-family: $font;
-    text-transform: uppercase;
-    color: #0d0221;
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin: 0 ($section-margin * 2 + 1rem) 0 0;
-    border-bottom: 1px solid #0d0221;
-}
+.section {
+    border-bottom: 2px solid map-get($colors, background-grey);
+    
+    p {
+        font-family: $font;
+        text-transform: uppercase;
+        color: #0d0221;
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin: 0 ($section-margin * 2 + 1rem) 0 0;
+        border-bottom: 1px solid #0d0221;
+    }
 
-.section.right {
-    p, .section-inner {
-        margin-right: $section-margin !important;
+    &.right {
+        p, .section-inner {
+            margin-right: $section-margin !important;
+        }
     }
 }
 
@@ -102,6 +106,10 @@ form {
         margin: $section-margin ($section-margin * 2) 0 0;
         padding-bottom: 1rem;
         border-bottom: 2px solid map-get($colors, background-grey);
+
+        &:last-of-type {
+            border-bottom: none !important;
+        }
     }
 
     .control-wrapper {
