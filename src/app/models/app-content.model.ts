@@ -5,6 +5,7 @@ export class AppContent {
     content: string;
     imageUrl: string;
     sort: number;
+    url: string;
 
     constructor(data = null) {
         if (data) {

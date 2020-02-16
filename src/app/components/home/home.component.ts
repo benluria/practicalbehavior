@@ -3,6 +3,7 @@ import { AppContent, AppContentTable } from 'src/app/models/app-content.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AppContentService } from 'src/app/services/app-content.service';
 import { PAGES } from '../../models/pages.const';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
   tiles: AppContent[] = [];
 
   constructor(public domSanitizer: DomSanitizer, 
-              private contentService: AppContentService) { }
+              private contentService: AppContentService,
+              private router: Router) { }
 
   async ngOnInit() {
     Promise.all([
@@ -32,5 +34,9 @@ export class HomeComponent implements OnInit {
         this.tiles.push(copy);
       });
     });
+  }
+
+  goToPage(page: string) {
+    this.router.navigate([page]);
   }
 }

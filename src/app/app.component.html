@@ -8,7 +8,7 @@
     <div flex justify-content-end
     align-center
     col-9 col-md-0 col-lg-10 >
-        <div text-center class="nav-item" *ngFor="let item of navItems; let i = index;" [ngClass]="{'p-top': i + 1 == navItems.length}">
+        <div text-center class="nav-item" *ngFor="let item of navItems; let i = index;" [ngClass]="{'last-item': i + 1 == navItems.length}">
           <a [ngClass]="{'referral' : i + 1 == navItems.length}" [routerLink]="[item.link]">{{item.title}}</a>
           <div *ngIf="i + 1 < navItems.length" class="underscore"></div>
         </div>

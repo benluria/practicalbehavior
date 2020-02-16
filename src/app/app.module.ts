@@ -15,6 +15,11 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ListContentComponent } from './components/list-content/list-content.component';
 import { ReferralComponent } from './components/referral/referral.component';
+import { ServicesComponent } from './components/services/services.component';
+import { ResourcesComponent } from './components/resources/resources.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AbaComponent } from './components/aba/aba.component';
+import { AboutComponent } from './components/about/about.component';
 
 import { AuthService } from './services/auth.service';
 import { DialogService } from './services/dialog.service';
@@ -43,7 +48,12 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     HomeComponent,
     AdminComponent,
     ListContentComponent,
-    ReferralComponent
+    ReferralComponent,
+    ServicesComponent,
+    ResourcesComponent,
+    ContactComponent,
+    AbaComponent,
+    AboutComponent
   ],
   providers: [ 
     AuthService, 

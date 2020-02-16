@@ -37,23 +37,23 @@ export class AppComponent implements OnInit {
   navItems = [
     {
       title: 'About Us',
-      link: '/about-us'
+      link: 'about'
     },
     {
       title: 'Services Provided',
-      link: '/services'
+      link: 'services'
     },
     {
       title: 'What is ABA?',
-      link: '/aba'
+      link: 'aba'
     },
     {
       title: 'Resources',
-      link: '/resources'
+      link: 'resources'
     },
     {
       title: 'Contact Us',
-      link: '/contact'
+      link: 'contact'
     },
     {
       title: 'Submit a Referral',

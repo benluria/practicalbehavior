@@ -15,7 +15,7 @@ function RetriveContentRequest(req, res, next) {
     const connection = CreateSQLConnection();
     
     const sqlQuery = `
-    SELECT [Id], [Page], [Description], [Content], [ImageUrl], [Sort]
+    SELECT [Id], [Page], [Description], [Content], [ImageUrl], [Sort], [Url]
     FROM ApplicationContent
     WHERE [IsActive] = 1`;
     

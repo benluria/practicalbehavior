@@ -11,7 +11,7 @@
 
     <div id="tileContainer">
         <div flex row style="justify-content: space-between;">
-            <div *ngFor="let tile of tiles" class="tile">
+            <div *ngFor="let tile of tiles" class="tile" (click)="goToPage(tile.url)">
                 <div class="tile-inner">
                     <img [src]="domSanitizer.bypassSecurityTrustUrl(tile.imageUrl)">
                     <h4>{{tile.description}}</h4>
