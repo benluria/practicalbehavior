@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="63px" height="63px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>resources</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Homepage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-763.000000, -983.000000)">
+        <g id="resources" transform="translate(763.000000, 983.000000)" fill="#A6CFD5" fill-rule="nonzero">
+            <path d="M31.5,0 C14.1030304,-1.06525716e-15 2.13051432e-15,14.1030304 0,31.5 C-2.13051432e-15,48.8969696 14.1030304,63 31.5,63 C48.8969696,63 63,48.8969696 63,31.5 C63,23.1456806 59.6812595,15.1335323 53.7738636,9.22613639 C47.8664677,3.31874047 39.8543194,5.11554527e-16 31.5,0 Z M46.0535117,49.3795987 L16.9464883,49.3795987 L16.9464883,13.6204013 L46.0685619,13.6204013 L46.0535117,49.3795987 Z" id="Shape"></path>
+            <rect id="Rectangle-path" x="22" y="19" width="14" height="2"></rect>
+            <rect id="Rectangle-path" x="22" y="23" width="19" height="2"></rect>
+            <rect id="Rectangle-path" x="22" y="28" width="15" height="2"></rect>
+            <rect id="Rectangle-path" x="22" y="32" width="17" height="2"></rect>
+            <rect id="Rectangle-path" x="22" y="37" width="19" height="2"></rect>
+            <rect id="Rectangle-path" x="22" y="41" width="13" height="2"></rect>
+        </g>
+    </g>
+</svg>

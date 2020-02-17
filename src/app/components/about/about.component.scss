@@ -14,7 +14,7 @@
 
 #pageTitle {
     margin-top: -2.5rem;
-    width: 40%;
+    width: 25%;
     background-color: map-get($colors, background-grey);
     font-family: $font;
     letter-spacing: 1px;
@@ -23,4 +23,54 @@
     color: map-get($colors, dark);
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.text-container {
+    width: 65%;
+    margin: 2rem auto 4rem;
+    font-family: $font;
+
+    &.employees {
+        width: 90%;
+        
+        .employee {
+            width: 31.5%;
+            border: 1px solid map-get($colors, secondary);
+            padding-bottom: 1rem;
+            margin-bottom: 2.5%;
+            font-family: $font;
+
+            h3 {
+                margin-bottom: .5rem;
+                color: map-get($colors, primary);
+            }
+            h5 {
+                margin-top: 0;
+                margin-bottom: .5rem;
+            }
+            p {
+                margin: 0;
+            }
+        }
+    }
+
+    h1 {
+        text-align: center;
+    }
+    p {
+        line-height: 1.5rem;
+        font-weight: lighter;
+    }
+    
+}
+
+#imgContainer {
+    background-color: map-get($colors, primary);
+    text-align: center;
+    padding: 2rem 0;
+
+    img {
+        width: 40%;
+        display: inline-block;
+    }
 }

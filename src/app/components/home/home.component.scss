@@ -13,6 +13,19 @@
     }
 
     #hero {
+        background-color: map-get($colors, primary);
+        
+        @media screen and (min-width: $break-large) {
+            min-height: 475px
+        }
+
+        @media screen and (min-width: $break-medium) {
+            min-height: 420px;            
+        }
+
+        @media screen and (min-width: $break-xsmall) {
+            min-height: 350px;
+        }
 
         #heroImg {
             width: 100%;

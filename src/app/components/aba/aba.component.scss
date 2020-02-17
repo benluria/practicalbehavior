@@ -14,7 +14,7 @@
 
 #pageTitle {
     margin-top: -2.5rem;
-    width: 40%;
+    width: 25%;
     background-color: map-get($colors, background-grey);
     font-family: $font;
     letter-spacing: 1px;
@@ -23,4 +23,31 @@
     color: map-get($colors, dark);
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.bottom {
+    width: 100%;
+    background-color: map-get($colors, background-grey);
+    height: 100%;
+
+    .text-container {
+        padding: 1rem 0;
+        height: 100%;
+        margin: 0 auto;
+    }
+}
+
+.text-container {
+    width: 65%;
+    margin: 2rem auto 4rem;
+    font-family: $font;
+
+    h1 {
+        text-align: center;
+    }
+    p {
+        line-height: 1.5rem;
+        font-weight: lighter;
+    }
+    
 }

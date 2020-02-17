@@ -14,7 +14,7 @@
 
 #pageTitle {
     margin-top: -2.5rem;
-    width: 40%;
+    width: 30%;
     background-color: map-get($colors, background-grey);
     font-family: $font;
     letter-spacing: 1px;
@@ -23,4 +23,46 @@
     color: map-get($colors, dark);
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.text-container {
+    width: 65%;
+    margin: 2rem auto 4rem;
+    font-family: $font;
+    font-weight: lighter;
+    font-size: 1.2rem;
+    line-height: 2rem;
+
+    &.description {
+        padding: 2.5rem 5rem;
+    }
+
+    &.bottom {
+        width: 100%;
+        background-color: map-get($colors, background-grey);
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        margin-bottom: 0;
+
+        div[row] {
+            width: 93%;
+            margin: 0 auto;
+            padding-top: 1rem;
+            
+            div[col-3] p {
+                text-align: center;
+                font-weight: bold;
+                white-space: normal !important;
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            div[col-9] p {
+                padding: 0 4rem;
+                line-height: 1.2rem;
+                font-size: 1.1rem;
+                white-space: normal !important;
+            }
+        }
+    }
 }

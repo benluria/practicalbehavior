@@ -14,7 +14,7 @@
 
 #pageTitle {
     margin-top: -2.5rem;
-    width: 40%;
+    width: 25%;
     background-color: map-get($colors, background-grey);
     font-family: $font;
     letter-spacing: 1px;
@@ -23,4 +23,43 @@
     color: map-get($colors, dark);
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+#body {
+    width: 80%;
+    margin: auto;
+    padding: 2rem 0;
+
+    .contact-container {
+        margin-bottom: 2rem;
+    }
+
+    .icon {
+        display: inline-block;
+        margin-right: 1.5rem;
+    }
+    .contact-values {
+        display: inline-block;
+        font-family: $font;
+
+        .label {
+            margin-bottom: 0;
+            font-weight: lighter;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .value {
+            margin-top: 0;
+            color: map-get($colors, primary);
+            font-weight: bold;
+            text-decoration: none !important;
+        }
+    }
+
+    div[col-7] {
+        img {
+            height: 16rem;
+            display:inline-block;
+        }
+    }
 }

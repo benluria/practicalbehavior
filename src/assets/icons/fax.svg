@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>001-technology</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Internal-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Contact-Us" transform="translate(-171.000000, -436.000000)" fill="#A6CFD5" fill-rule="nonzero">
+            <g id="001-technology" transform="translate(171.000000, 436.000000)">
+                <rect id="Rectangle-path" x="22.5" y="41.25" width="15" height="2.625"></rect>
+                <rect id="Rectangle-path" x="22.5" y="37.5" width="15" height="2.625"></rect>
+                <path d="M30,0 C13.5,0 0,13.5 0,30 C0,46.5 13.5,60 30,60 C46.5,60 60,46.5 60,30 C60,13.5 46.5,0 30,0 Z M19.875,18.75 L19.875,11.25 L39.75,11.25 L39.75,18.75 L39.75,23.625 L19.875,23.625 L19.875,18.75 Z M40.125,41.25 L40.125,48.75 L19.875,48.75 L19.875,41.25 L19.875,36.375 L39.75,36.375 L39.75,41.25 L40.125,41.25 Z M49.875,36.375 C49.875,39 47.25,41.25 45,41.25 L42.375,41.25 L42.375,36.375 L42.375,33.75 L17.625,33.75 L17.625,36.375 L17.625,41.25 L15,41.25 C12.375,41.25 10.125,38.625 10.125,36.375 L10.125,23.625 C10.125,21.375 12.375,18.75 15,18.75 L17.625,18.75 L17.625,23.625 L17.625,26.25 L42.75,26.25 L42.75,23.625 L42.75,18.75 L45,18.75 C47.625,18.75 49.875,21.375 49.875,23.625 L49.875,36.375 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
