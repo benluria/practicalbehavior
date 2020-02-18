@@ -8,3 +8,8 @@ export const PAGES = {
     contact: 'CONTACT',
     resources: 'RESOURCES'
 }
+
+export const CHECKBOXTYPES = {
+    behavior: 'BEHAVIOR',
+    treatment: 'TREATMENT'
+}

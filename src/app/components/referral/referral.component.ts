@@ -1,7 +1,7 @@
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { AppContentTable } from 'src/app/models/app-content.model';
 import { AppContentService } from 'src/app/services/app-content.service';
-import { PAGES } from 'src/app/models/pages.const';
+import { PAGES, CHECKBOXTYPES } from 'src/app/models/pages.const';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ReferralService } from 'src/app/services/referral.service';
@@ -45,86 +45,34 @@ export class ReferralComponent implements OnInit {
   }
 
   async getFormInfo() {
-    const resp = await this.referralService.getInfo();
-    this.behaviorCheckboxes = [ 
-      {
-        name: 'physicalAggression',
-        label: 'Physical Aggression (Harming, or attempting to harm, another individual)',
-        checked: false
-      },
-      {
-        name: 'selfInjurious',
-        label: 'Self-Injurious Behaviors (Harming, or attempting to harm, self)',
-        checked: false
-      },
-      {
-        name: 'propertyDestruction',
-        label: 'Property Destruction (Destroying, or attempting to destroy, property)',
-        checked: false
-      },
-      {
-        name: 'elopement',
-        label: 'Elopement (Leaving, or attempting to leave, the supervised area)',
-        checked: false
-      },
-      {
-        name: 'PICA',
-        label: 'PICA (Ingesting, or attempting to ingest, inedible objects)',
-        checked: false
-      },
-      {
-        name: 'tantrum',
-        label: 'Tantrum (Crying, screaming, yelling, throwing things, or falling to the floor)',
-        checked: false
-      },
-      {
-        name: 'verbalAggression',
-        label: 'Verbal Aggression (Yelling, screaming, or cursing at another individual)',
-        checked: false
-      },
-      {
-        name: 'noncompliance',
-        label: 'Noncompliance (Not complying with necessary instructions)',
-        checked: false
-      },
-      {
-        name: 'otherCheckbox',
-        label: 'Other',
-        checked: false
-      }
-    ];
-    this.treatmentCheckboxes = [
-      {
-        name: 'speechTherapy',
-        label: 'Speech Therapy',
-        checked: false
-      },
-      {
-        name: 'occupationalTherapy',
-        label: 'Occupational Therapy',
-        checked: false
-      },
-      {
-        name: 'aba',
-        label: 'ABA',
-        checked: false
-      },
-      {
-        name: 'informalTreatment',
-        label: 'Informal Behavior Treatment',
-        checked: false
-      },
-      {
-        name: 'medication',
-        label: 'Medication',
-        checked: false
-      },
-      {
-        name: 'otherTreatmentCheckbox',
-        label: 'Other',
-        checked: false
-      }
-    ]
+    // const resp = await this.referralService.getInfo();
+    const contentRaw = await this.contentService.retrieveContent();
+    const behaviorBoxesRaw = contentRaw.filter(x => x.page == PAGES.referral && x.isCheckbox && x.checkboxDescription == CHECKBOXTYPES.behavior);
+    const treatmentBoxesRaw = contentRaw.filter(x => x.page == PAGES.referral && x.isCheckbox && x.checkboxDescription == CHECKBOXTYPES.treatment);
+
+    if (behaviorBoxesRaw) {
+      this.behaviorCheckboxes = [];
+
+      behaviorBoxesRaw.forEach(x => {
+        this.behaviorCheckboxes.push({
+          name: x.description,
+          label: x.content,
+          checked: false
+        });
+      });
+    }
+
+    if (treatmentBoxesRaw) {
+      this.treatmentCheckboxes = [];
+
+      treatmentBoxesRaw.forEach(x => {
+        this.treatmentCheckboxes.push({
+          name: x.description,
+          label: x.content,
+          checked: false
+        });
+      });
+    } 
   }
 
   createForm() {
@@ -255,8 +203,11 @@ export class ReferralComponent implements OnInit {
       const phoneNumber = parsePhoneNumberFromString(val, 'US');
       if (phoneNumber && phoneNumber.isValid()) {
         const formatted = phoneNumber.formatNational(); 
-        if (!val.includes(formatted))
-          this.referral.get(`${prefix}.phone`).patchValue(formatted);
+        if (!val.includes(formatted)) {
+          const control = this.referral.get(`${prefix}.phone`);
+          if (control)
+            control.patchValue(formatted);
+        }
       }
     }
   }
@@ -277,6 +228,7 @@ export class ReferralComponent implements OnInit {
 
   onSubmit() {
     this.attemptedSubmit = true;
+
     // if (this.referralService.referralCount > 0) {
     //   alert('are you sure?');
     //   //show 'are you sure';
@@ -311,21 +263,24 @@ export class ReferralComponent implements OnInit {
     }
 
     const formValues = this.referral.value;
-    console.log(formValues);
     this.referralService.sendReferral(formValues);
   }
 
   behaviorCheckboxChange(box: any, prefix: string) {
     box.checked = !box.checked;
-    this.referral.get(`${prefix}.${box.name}`).patchValue(box.checked);
+    const control = this.referral.get(`${prefix}.${box.name}`);
+    if (control)
+      control.patchValue(box.checked);
   }
 
   handleCheckboxChange(control: FormControl) {
-    control.patchValue(!control.value);
+    if (control)
+      control.patchValue(!control.value);
   }
 
   getCheckedValue(control: FormControl) {
-    return control.value;
+    if (control)
+      return control.value;
   }
 
   handleDIDD() {
@@ -340,10 +295,10 @@ export class ReferralComponent implements OnInit {
   }
 
   async resolved(token: string) {
-    console.log(token);
     const resp = await this.referralService.validateRecaptcha(token);
-    this.referral.get('recaptcha').patchValue(resp && resp.success);
-    console.log(resp);
+    const control = this.referral.get('recaptcha');
+    if (control)
+      control.patchValue(resp && resp.success);
   }
 
 }

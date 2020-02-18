@@ -6,6 +6,9 @@ export class AppContent {
     imageUrl: string;
     sort: number;
     url: string;
+    isCheckbox: boolean;
+    isTile: boolean;
+    checkboxDescription: string;
 
     constructor(data = null) {
         if (data) {
