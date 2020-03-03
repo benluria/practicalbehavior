@@ -8,6 +8,7 @@ import  { CACHE_KEYS } from '../models/cache-keys.const';
 import { environment } from '../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
 import { Employee } from '../models/employee.model';
+import { Service } from '../models/service.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import { Employee } from '../models/employee.model';
 export class AppContentService {
   appContent: AppContent[];
   employees: Employee[];
+  services: Service[];
   loadInProgress = false;
 
   constructor(private http: HttpClient, 
@@ -93,8 +95,7 @@ export class AppContentService {
 
   async getEmployees() {
     if (!this.employees) {
-      const employees = await this.http.get<Employee[]>(`${environment.apiUrl}/employees`).toPromise();
-      this.employees = employees;
+      this.employees = await this.http.get<Employee[]>(`${environment.apiUrl}/employees`).toPromise();
     }
     return this.employees;
   }
@@ -108,6 +109,25 @@ export class AppContentService {
   async deleteEmployee(id: number) {
     const resp = await this.http.delete(`${environment.apiUrl}/employee?id=${id}`).toPromise();
     this.employees = null;
+    return resp;
+  }
+
+  async getServices() {
+    if (!this.services) {
+      this.services = await this.http.get<Service[]>(`${environment.apiUrl}/services`).toPromise();
+    }
+    return this.services;
+  }
+
+  async saveService(service: Service) {
+    const resp = await this.http.post(`${environment.apiUrl}/service`, {service}).toPromise();
+    this.services = null;
+    return resp;
+  }
+
+  async deleteService(id: number) {
+    const resp = await this.http.delete(`${environment.apiUrl}/service?id=${id}`).toPromise();
+    this.services = null;
     return resp;
   }
 }

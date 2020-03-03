@@ -7,6 +7,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PAGES } from 'src/app/models/pages.const';
 import { Employee } from 'src/app/models/employee.model';
+import { Service } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-list-content',
@@ -19,8 +20,12 @@ export class ListContentComponent implements OnInit {
   tiles: AppContent[];
   activeItem: AppContent;
   appContentForm: FormGroup;
+
   employeesOpen: boolean;
   employees: Employee[];
+
+  servicesOpen: boolean;
+  services: Service[];
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -75,15 +80,25 @@ export class ListContentComponent implements OnInit {
       this.page = params.page;
     });
 
-    if (this.page == 'ABOUT US') {
-      const resp = await Promise.all([
-        this.contentService.getEmployees(),
-        this.retrieveAppContent()
-      ]);
+    switch (this.page) {
+      case 'ABOUT US':
+        const employeesRaw = await Promise.all([
+          this.contentService.getEmployees(),
+          this.retrieveAppContent()
+        ]);
+  
+        this.employees = employeesRaw[0];
+        break;
+      case 'SERVICES PROVIDED':
+        const servicesRaw = await Promise.all([
+          this.contentService.getServices(),
+          this.retrieveAppContent()
+        ]);
 
-      this.employees = resp[0];
-    } else {
-      await this.retrieveAppContent();
+        this.services = servicesRaw[0];
+        break;
+      default:
+        await this.retrieveAppContent();
     }
 
     this.setUpForm();

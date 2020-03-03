@@ -5,22 +5,13 @@
 <div class="description text-container" *ngIf="appContent" [innerHTML]="appContent['Main Text']">
 </div>
 
-<div class="bottom text-container">
-    <div flex row align-center>
+<div class="bottom text-container" *ngIf="services">
+    <div flex row align-center *ngFor="let row of services">
         <div col-3 text-right>
-            <p>Header Text</p>
+            <p>{{row.title}}</p>
         </div>
         <div col-9>
-            <p>The purpose of the functional assessment is to determine why certain problem behaviors occur, so that the behavior analyst is able to create treatment programming to target those functions. This process includes direct observations of the individual in the environment in which problem behaviors are most likely to occur, interviews with caregivers, and review of historical data.</p>
-        </div>
-    </div>
-    <div flex row align-center>
-        <div col-3 text-right>
-            <p>Collaboration with Other Professionals
-            </p>
-        </div>
-        <div col-9>
-            <p>At PBA, we are committed to consistent treatment, and as such, we welcome collaboration with other therapists such as speech language pathologists, occupational therapists, and psychologists. It is important to ensure that behavioral treatment continues across all settings that an individual experiences. Behavior analysts can work closely with other therapists to ensure that challenging behavior does not impede on their treatment gains.</p>
+            <p>{{row.description}}</p>
         </div>
     </div>
 </div>

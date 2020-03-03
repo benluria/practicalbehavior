@@ -145,7 +145,7 @@ function UpdateEmployee(req, res, next) {
         next();
     });
 
-    if (employee.id) {
+    if (employee.id > 0) {
         request.addParameter('id', TYPES.Int, employee.id);
     }
     request.addParameter('name', TYPES.NVarChar, employee.name);
@@ -167,6 +167,111 @@ function DeleteEmployee(req, res, next) {
 
 
     const storedProc = 'Employees_Delete'
+    
+    var request = new Request(storedProc, function(err) {
+        connection.close();
+
+        if (err) {
+            console.error(err);
+            req.success = false;
+            res.statusCode = 500;
+        } else {
+            req.success = true;
+        }
+        
+        next();
+    });
+
+    request.addParameter('id', TYPES.Int, id);
+    
+    ExecuteSqlQuery(connection, request, true);
+}
+
+router.get('/services', RetrieveServices, (req, res) => {
+    res.json(req.services);
+});
+
+function RetrieveServices(req, res, next) {
+    const result = [];
+    const connection = CreateSQLConnection();
+
+    const sqlQuery = `
+    SELECT [Id], [Title], [Description]
+    FROM Services`;
+
+    var sqlRequest = new Request(sqlQuery, function(err, rowCount, rows) {
+        connection.close();
+
+        if (err) {
+            console.error(err);
+            res.statusCode = 500;
+            return res.json({ err });
+        };
+        
+        req.services = result;
+        next();
+    });
+    
+    sqlRequest.on('row', function(columns) {
+        const row = {};  
+        
+        columns.forEach(function(column) {
+        const colName = column.metadata.colName;
+        const key = colName && colName.length > 0 ? colName[0].toLowerCase() + colName.slice(1) : '';
+        row[key] = column.value;
+        });
+        
+        result.push(row);
+    });
+    
+    ExecuteSqlQuery(connection, sqlRequest);
+}
+
+router.post('/service', UpdateService, (req, res) => {
+    res.send(req.success);
+});
+
+function UpdateService(req, res, next) {
+    //check token
+
+    const connection = CreateSQLConnection();
+    const service = req.body.service;
+
+    const storedProc = service.id > 0 ? `Services_Update` : 'Services_Insert';
+
+    var request = new Request(storedProc, function(err) {
+        connection.close();
+
+        if (err) {
+            console.error(err);
+            req.success = false;
+            res.statusCode = 500;
+        } else {
+            req.success = true;
+        }
+        
+        next();
+    });
+
+    if (service.id > 0) {
+        request.addParameter('id', TYPES.Int, service.id);
+    }
+    request.addParameter('title', TYPES.NVarChar, service.name);
+    request.addParameter('description', TYPES.NVarChar, service.description);
+
+    ExecuteSqlQuery(connection, request, true);
+}
+
+router.delete('/service', DeleteService, (req, res) => {
+    res.send(req.success);
+});
+
+function DeleteService(req, res, next) {
+    const id = req.query.id;
+    const connection = CreateSQLConnection();
+
+
+    const storedProc = 'Services_Delete'
     
     var request = new Request(storedProc, function(err) {
         connection.close();

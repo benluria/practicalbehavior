@@ -23,6 +23,21 @@
                     </div>
                 </div>
             </div>
+
+            <div *ngIf="services" flex column align-center>
+                <div col-8 class="content-wrapper"
+                [ngClass]="{'show': servicesOpen}">
+                <div class="title" (click)="servicesOpen = !servicesOpen">
+                    Services
+                    <i class="material-icons">expand_less</i>
+                </div>
+
+                <div class="content">
+                   
+                </div>
+            </div>
+            </div>
+
             <div *ngIf="employees" flex column align-center>
                 <div col-8 class="content-wrapper"
                     [ngClass]="{'show': employeesOpen}">
