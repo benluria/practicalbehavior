@@ -32,6 +32,11 @@
 
     &.employees {
         width: 90%;
+
+        div[flex]::after {    
+            content: "";
+            flex-basis: 31.5%;
+        }
         
         .employee {
             width: 31.5%;
@@ -41,15 +46,18 @@
             font-family: $font;
 
             h3 {
+                font-size: 1.3rem;
                 margin-bottom: .5rem;
                 color: map-get($colors, primary);
             }
             h5 {
+                font-size: .95rem;
                 margin-top: 0;
                 margin-bottom: .5rem;
             }
             p {
-                margin: 0;
+                margin: .5rem 0;
+                padding: 0 1rem;
             }
         }
     }
@@ -57,7 +65,8 @@
     h1 {
         text-align: center;
     }
-    p {
+
+    #statementText {
         line-height: 1.5rem;
         font-weight: lighter;
     }

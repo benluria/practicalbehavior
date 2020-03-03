@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppContentTable } from 'src/app/models/app-content.model';
+import { AppContentService } from 'src/app/services/app-content.service';
+import { PAGES } from 'src/app/models/pages.const';
 
 @Component({
   selector: 'app-aba',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aba.component.scss']
 })
 export class AbaComponent implements OnInit {
+  appContent: AppContentTable;
 
-  constructor() { }
+  constructor(private contentService: AppContentService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.appContent = await this.contentService.getContentForPage(PAGES.whatIsABA);
   }
 
 }

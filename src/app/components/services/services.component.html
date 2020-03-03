@@ -1,11 +1,8 @@
 <div id="header"></div>
 <div id="sub1"></div>
-<!-- <div id="pageTitle" [innerHTML]="appContent['Title']"></div> -->
-<div id="pageTitle"><p>SERVICES PROVIDED</p></div>
+<div id="pageTitle" *ngIf="appContent" [innerHTML]="appContent['Title']"></div>
 
-<div class="description text-container">
-    <p>We serve many populations, including Autism Spectrum Disorder, Intellectual/Developmental Disabilities, and have experience with many other populations of individuals. If your loved one is experiencing a deficit in important adaptive skills, or if they engage in dangerous or challenging behavior, we will work with them to create opportunities for independence and success.</p>
-    <p>Practical Behavior Analysis gladly accepts several types of funding, including DIDD, TennCare, private/commercial insurance, and private pay.</p>
+<div class="description text-container" *ngIf="appContent" [innerHTML]="appContent['Main Text']">
 </div>
 
 <div class="bottom text-container">

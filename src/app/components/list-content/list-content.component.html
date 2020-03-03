@@ -23,6 +23,39 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="employees" flex column align-center>
+                <div col-8 class="content-wrapper"
+                    [ngClass]="{'show': employeesOpen}">
+                    <div class="title" (click)="employeesOpen = !employeesOpen">
+                        Employees
+                        <i class="material-icons">expand_less</i>
+                    </div>
+
+                    <div class="content">
+                        <div flex row>
+                            <div col-7 text-center>
+                                <p>EMPLOYEE</p>
+                                <div id="employeeForm" formGroupName="employee">
+                                    <div><input type="text" class="name" placeholder="Employee Name" formControlName="name" /></div>
+                                    <div><input type="text" class="sub-header" placeholder="Description" formControlName="description" /></div>
+                                    <div><input type="text" class="sub-header" placeholder="Description 2" formControlName="description2" /></div>
+                                    <div><input type="text" class="sub-text" placeholder="Education" formControlName="education" /></div>
+                                    <div><input type="text" class="sub-text" placeholder="Locations Served" formControlName="location" /></div>
+                                    <div class="button-row">
+                                        <button type="button" id="deleteEmployee" (click)="deleteEmployee()">Remove</button>
+                                        <button type="button" id="saveEmployee" (click)="saveEmployee()">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div col-5 id="employeeList" text-center>
+                                <p>EMPLOYEES</p>
+                                <div class="employee" (click)="fillEmployeeForm(employee)">Add New Employee</div>
+                                <div class="employee" *ngFor="let employee of employees" (click)="fillEmployeeForm(employee)">{{employee.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 

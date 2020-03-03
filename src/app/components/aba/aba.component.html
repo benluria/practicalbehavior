@@ -1,7 +1,6 @@
 <div id="header"></div>
 <div id="sub1"></div>
-<!-- <div id="pageTitle" [innerHTML]="appContent['Title']"></div> -->
-<div id="pageTitle"><p>WHAT IS ABA?</p></div>
+<div id="pageTitle" *ngIf="appContent" [innerHTML]="appContent['Title']"></div>
 
 <div class="text-container">
     <h1>Overview</h1>

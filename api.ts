@@ -7,10 +7,10 @@ import createPDF from './referral';
 const router = express.Router();
 
 //#region APP CONTENT
-router.get('/app-content', RetriveContentRequest, (req, res) => {
+router.get('/app-content', RetrieveContentRequest, (req, res) => {
     res.json(req.appContent);
 });
-function RetriveContentRequest(req, res, next) {
+function RetrieveContentRequest(req, res, next) {
     const result = [];
     const connection = CreateSQLConnection();
     
@@ -56,7 +56,7 @@ function UpdateContent(req, res, next) {
 
     const connection = CreateSQLConnection();
     
-    const storedProc = `AppContent_Update`; //not sure this is correct syntax
+    const storedProc = `AppContent_Update`;
     
     var request = new Request(storedProc, function(err) {
         connection.close();
@@ -75,6 +75,115 @@ function UpdateContent(req, res, next) {
     request.addParameter('id', TYPES.Int, req.body.id);
     request.addParameter('content', TYPES.NVarChar, req.body.content);
 
+    ExecuteSqlQuery(connection, request, true);
+}
+
+router.get('/employees', RetrieveEmployeesRequest, (req, res) => {
+    res.json(req.employees);
+});
+
+function RetrieveEmployeesRequest(req, res, next) {
+    const result = [];
+    const connection = CreateSQLConnection();
+
+    const sqlQuery = `
+    SELECT [Id], [Name], [Description], [Description2], [Education], [Location]
+    FROM Employees`;
+
+    var sqlRequest = new Request(sqlQuery, function(err, rowCount, rows) {
+        connection.close();
+
+        if (err) {
+            console.error(err);
+            res.statusCode = 500;
+            return res.json({ err });
+        };
+        
+        req.employees = result;
+        next();
+    });
+    
+    sqlRequest.on('row', function(columns) {
+        const row = {};  
+        
+        columns.forEach(function(column) {
+        const colName = column.metadata.colName;
+        const key = colName && colName.length > 0 ? colName[0].toLowerCase() + colName.slice(1) : '';
+        row[key] = column.value;
+        });
+        
+        result.push(row);
+    });
+    
+    ExecuteSqlQuery(connection, sqlRequest);
+}
+
+router.post('/employee', UpdateEmployee, (req, res) => {
+    res.send(req.success);
+});
+
+function UpdateEmployee(req, res, next) {
+    //check token
+
+    const connection = CreateSQLConnection();
+    const employee = req.body.employee;
+
+
+    const storedProc = employee.id > 0 ? `Employees_Update` : 'Employees_Insert';
+    
+    var request = new Request(storedProc, function(err) {
+        connection.close();
+
+        if (err) {
+            console.error(err);
+            req.success = false;
+            res.statusCode = 500;
+        } else {
+            req.success = true;
+        }
+        
+        next();
+    });
+
+    if (employee.id) {
+        request.addParameter('id', TYPES.Int, employee.id);
+    }
+    request.addParameter('name', TYPES.NVarChar, employee.name);
+    request.addParameter('description', TYPES.NVarChar, employee.description);
+    request.addParameter('description2', TYPES.NVarChar, employee.description2);
+    request.addParameter('education', TYPES.NVarChar, employee.education);
+    request.addParameter('location', TYPES.NVarChar, employee.location);
+    
+    ExecuteSqlQuery(connection, request, true);
+}
+
+router.delete('/employee', DeleteEmployee, (req, res) => {
+    res.send(req.success);
+});
+
+function DeleteEmployee(req, res, next) {
+    const id = req.query.id;
+    const connection = CreateSQLConnection();
+
+
+    const storedProc = 'Employees_Delete'
+    
+    var request = new Request(storedProc, function(err) {
+        connection.close();
+
+        if (err) {
+            console.error(err);
+            req.success = false;
+            res.statusCode = 500;
+        } else {
+            req.success = true;
+        }
+        
+        next();
+    });
+
+    request.addParameter('id', TYPES.Int, id);
+    
     ExecuteSqlQuery(connection, request, true);
 }
 //#endregion

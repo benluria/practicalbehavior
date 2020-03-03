@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppContentService } from 'src/app/services/app-content.service';
+import { PAGES } from 'src/app/models/pages.const';
+import { AppContentTable } from 'src/app/models/app-content.model';
 
 @Component({
   selector: 'app-services',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent implements OnInit {
+  appContent: AppContentTable;
+  
+  constructor(private contentService: AppContentService) { }
 
-  constructor() { }
-
-  ngOnInit() {
+  async ngOnInit() {
+    this.appContent = await this.contentService.getContentForPage(PAGES.servicesProvided);
   }
 
 }

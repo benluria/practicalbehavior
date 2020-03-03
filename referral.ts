@@ -47,8 +47,8 @@ const createPDF = (req, res, next) => {
         };
   
         mailgun.messages().send(data, function(error, body) {
-          console.log("ERROR" + error);
-          console.log("BODY" + JSON.stringify(body));
+          // console.log("ERROR" + error);
+          // console.log("BODY" + JSON.stringify(body));
           fs.unlink(fileName, (err) => {
             console.error(err);
           })

@@ -4,8 +4,9 @@ import { AppContent } from 'src/app/models/app-content.model';
 import { AppContentService } from 'src/app/services/app-content.service';
 
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PAGES } from 'src/app/models/pages.const';
+import { Employee } from 'src/app/models/employee.model';
 
 @Component({
   selector: 'app-list-content',
@@ -18,6 +19,8 @@ export class ListContentComponent implements OnInit {
   tiles: AppContent[];
   activeItem: AppContent;
   appContentForm: FormGroup;
+  employeesOpen: boolean;
+  employees: Employee[];
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -72,7 +75,16 @@ export class ListContentComponent implements OnInit {
       this.page = params.page;
     });
 
-    await this.retrieveAppContent();
+    if (this.page == 'ABOUT US') {
+      const resp = await Promise.all([
+        this.contentService.getEmployees(),
+        this.retrieveAppContent()
+      ]);
+
+      this.employees = resp[0];
+    } else {
+      await this.retrieveAppContent();
+    }
 
     this.setUpForm();
   }
@@ -82,6 +94,17 @@ export class ListContentComponent implements OnInit {
     this.appContent.forEach(x => {
       controls[x.description] = new FormControl(x.content);
     });
+
+    if (this.employees) {
+      controls['employee'] = this.fb.group({
+        id: 0,
+        name: ['', Validators.required],
+        description: '',
+        description2: '',
+        education: '',
+        location: ''
+      });
+    }
 
     this.appContentForm = this.fb.group(controls);
   }
@@ -118,6 +141,47 @@ export class ListContentComponent implements OnInit {
       } else {
         //show error
       }
+    }
+  }
+
+  async saveEmployee() {
+    const formValues = this.appContentForm.value.employee;
+
+    if (!formValues.name) return;
+
+    await this.contentService.saveEmployee(formValues);
+
+    const form = this.appContentForm.get('employee') as FormGroup;
+    form.reset();
+
+    this.employees = await this.contentService.getEmployees();
+  }
+
+  async deleteEmployee() {
+    let id = this.appContentForm.value.employee.id;
+    if (id > 0) {
+      await this.contentService.deleteEmployee(id);
+      const form = this.appContentForm.get('employee') as FormGroup;
+      form.reset();
+  
+      this.employees = await this.contentService.getEmployees();  
+    }
+  }
+
+  fillEmployeeForm(employee: Employee = null) {
+    let employeeForm = this.appContentForm.get('employee') as FormGroup;
+    if (employee) {
+      employeeForm.setValue(employee);
+      // employeeForm = this.fb.group({
+      //   id: employee.id,
+      //   name: employee.name,
+      //   description: employee.description,
+      //   description2: employee.description2,
+      //   education: employee.education,
+      //   location: employee.location
+      // });
+    } else {
+      employeeForm.reset();
     }
   }
 

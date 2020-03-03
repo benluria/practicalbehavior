@@ -7,12 +7,14 @@ import  { CACHE_KEYS } from '../models/cache-keys.const';
 
 import { environment } from '../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
+import { Employee } from '../models/employee.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppContentService {
   appContent: AppContent[];
+  employees: Employee[];
   loadInProgress = false;
 
   constructor(private http: HttpClient, 
@@ -87,5 +89,25 @@ export class AppContentService {
       console.error(err);
     }
     return false;
+  }
+
+  async getEmployees() {
+    if (!this.employees) {
+      const employees = await this.http.get<Employee[]>(`${environment.apiUrl}/employees`).toPromise();
+      this.employees = employees;
+    }
+    return this.employees;
+  }
+
+  async saveEmployee(employee: Employee) {
+    const resp = await this.http.post(`${environment.apiUrl}/employee`, {employee}).toPromise();
+    this.employees = null;
+    return resp;
+  }
+
+  async deleteEmployee(id: number) {
+    const resp = await this.http.delete(`${environment.apiUrl}/employee?id=${id}`).toPromise();
+    this.employees = null;
+    return resp;
   }
 }
