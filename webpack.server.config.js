@@ -5,10 +5,7 @@ const StringReplacePlugin = require('string-replace-webpack-plugin');
 module.exports = {
   entry: { server: './server.ts' },
   resolve: { 
-    extensions: ['.js', '.ts'],
-    alias: {
-			fs: path.join(__dirname, './src/browser-extensions/virtual-fs.js')
-		}
+    extensions: ['.js', '.ts']
   },
   target: 'node',
   mode: 'none',
