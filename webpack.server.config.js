@@ -39,7 +39,7 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				include: /(pdfkit|saslprep|unicode-trie|unicode-properties|dfa|linebreak|png-js)/,
+				include: /(pdfkit)/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -76,7 +76,6 @@ module.exports = {
 			},
 
 			{ enforce: 'post', test: /fontkit[/\\]index.js$/, loader: "transform-loader?brfs" },
-			{ enforce: 'post', test: /unicode-properties[/\\]index.js$/, loader: "transform-loader?brfs" },
 			{ enforce: 'post', test: /linebreak[/\\]src[/\\]linebreaker.js/, loader: "transform-loader?brfs" }
     ]
   },
