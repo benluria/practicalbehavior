@@ -10,7 +10,10 @@ module.exports = {
   target: 'node',
   mode: 'none',
   // this makes sure we include node_modules and other 3rd party libraries
-  externals: [/node_modules/],
+  externals: [/node_modules/, {
+    "fs": "require('fs')",
+    "pdfkit": "require('pdfkit')"
+  }],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
@@ -21,21 +24,7 @@ module.exports = {
       { test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/, parser: { system: true }},
       { enforce: 'post', test: /unicode-properties[\/\\]index.js$/, loader: "transform-loader?brfs"},
       { enforce: 'post', test: /fontkit[\/\\]index.js$/, loader: "transform-loader?brfs"},
-      { enforce: 'post', test: /linebreak[\/\\]src[\/\\]linebreaker.js/, loader: "transform-loader?brfs"},    
-			{ 
-        enforce: 'pre',
-				test: /pdfkit[/\\]js[/\\]/,
-				loader: StringReplacePlugin.replace({
-					replacements: [
-						{
-							pattern: "import fs from 'fs';",
-							replacement: function () {
-								return "var fs = require('fs');";
-							}
-						}
-					]
-				})
-			}
+      { enforce: 'post', test: /linebreak[\/\\]src[\/\\]linebreaker.js/, loader: "transform-loader?brfs"}
     ]
   },
   plugins: [
