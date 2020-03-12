@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/api/pba'
+  apiUrl: 'https://practicalbehavior.azurewebsites.net/api/pba'
 };
