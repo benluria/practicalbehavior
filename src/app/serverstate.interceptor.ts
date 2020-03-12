@@ -1,5 +1,5 @@
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import * as memoryCache from 'memory-cache';
@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class ServerStateInterceptor implements HttpInterceptor {
-    constructor(private transferState: TransferState, private ngZone: NgZone) {}
+    constructor(private transferState: TransferState) {}
 
     intercept(req:HttpRequest<any>, next: HttpHandler) {
         const cachedData = memoryCache.get(req.url);
@@ -20,9 +20,7 @@ export class ServerStateInterceptor implements HttpInterceptor {
         tap(event => {
             if (event instanceof HttpResponse) {
                 this.transferState.set(makeStateKey(req.url), event.body);
-                this.ngZone.runOutsideAngular(() => {
-                    memoryCache.put(req.url, event.body, 1000 * 60 * 15);
-                  })
+                memoryCache.put(req.url, event.body);
             }
         }))
     }
