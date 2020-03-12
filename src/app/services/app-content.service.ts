@@ -40,11 +40,6 @@ export class AppContentService {
   // retrieve content from api
   async retrieveContent(refreshCache = false): Promise<AppContent[]> {
     try {
-      if (refreshCache) {
-        
-        console.log(this.transferState.toJson());
-      }
-
       if (this.appContent != null && this.appContent.length > 0 && !refreshCache) {
         return this.appContent;
       }
