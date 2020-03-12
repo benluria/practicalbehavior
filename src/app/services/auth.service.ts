@@ -1,7 +1,4 @@
 import { Injectable, OnInit, PLATFORM_ID, Inject } from '@angular/core';
-
-import { Observable, of } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';

@@ -1,14 +1,11 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TransferState } from '@angular/platform-browser';
-
-import { AppContentTable, AppContent } from '../models/app-content.model';
-import  { CACHE_KEYS } from '../models/cache-keys.const';
 
 import { environment } from '../../environments/environment';
-import { isPlatformBrowser } from '@angular/common';
 import { Employee } from '../models/employee.model';
 import { Service } from '../models/service.model';
+import { AppContentTable, AppContent } from '../models/app-content.model';
+import { TransferState } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +16,7 @@ export class AppContentService {
   services: Service[];
   loadInProgress = false;
 
-  constructor(private http: HttpClient, 
-              private transferState: TransferState,
-              @Inject(PLATFORM_ID) private platformId: Object ) { }
+  constructor(private http: HttpClient, private transferState: TransferState) { }
 
   // call for page content
   async getContentForPage(page: string): Promise<AppContentTable> {
@@ -45,33 +40,26 @@ export class AppContentService {
   // retrieve content from api
   async retrieveContent(refreshCache = false): Promise<AppContent[]> {
     try {
+      if (refreshCache) {
+        
+        console.log(this.transferState.toJson());
+      }
+
       if (this.appContent != null && this.appContent.length > 0 && !refreshCache) {
         return this.appContent;
       }
       
-      console.log('TRANSFER STATE HAS KEY: ', this.transferState.hasKey(CACHE_KEYS.content));
-      if (this.transferState.hasKey(CACHE_KEYS.content) && !refreshCache) {
-        const res: AppContent[] = JSON.parse(this.transferState.get<string>(CACHE_KEYS.content, '[]'));
-        return res;
+      const response = await Promise.all([
+        this.http.get<AppContent[]>(`${environment.apiUrl}/app-content`).toPromise(),
+        this.getServices(),
+        this.getEmployees()
+      ]);
+
+      if (response) {
+        this.appContent = response[0];
+        return response[0];
       }
 
-      if (isPlatformBrowser(this.platformId) && !refreshCache) {
-        if (sessionStorage.getItem(CACHE_KEYS.content)) {
-          console.log('SESSION STORAGE HAS VALUE: CONTENT');
-          this.appContent = JSON.parse(sessionStorage.getItem(CACHE_KEYS.content));
-          return this.appContent;
-        }
-      }
-
-      console.log('CALLING API');
-      const content = await this.http.get<AppContent[]>(`${environment.apiUrl}/app-content`).toPromise();
-      if (content) {
-        this.transferState.set<string>(CACHE_KEYS.content, JSON.stringify(content));
-        if (isPlatformBrowser(this.platformId)) sessionStorage.setItem(CACHE_KEYS.content, JSON.stringify(content));
-        
-        this.appContent = content;
-        return content;
-      }
     } catch (err) {
       console.error(err);
       // put up an error page...? 
@@ -80,7 +68,6 @@ export class AppContentService {
   }
 
   async updateContent(id: number, content: string): Promise<boolean> {
-    console.log('CALLING API');
     try {
       const success = await this.http.put<boolean>(`${environment.apiUrl}/app-content`, {id, content}).toPromise();
       if (success) {

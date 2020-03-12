@@ -3,6 +3,7 @@ import { Connection, Request, TYPES } from 'tedious';
 import * as crypto from 'crypto';
 import * as request from 'request';
 import createPDF from './referral';
+import * as memoryCache from 'memory-cache';
 
 const router = express.Router();
 
@@ -66,6 +67,7 @@ function UpdateContent(req, res, next) {
             req.success = false;
             res.statusCode = 500;
         } else {
+            clearCache();
             req.success = true;
         }
         
@@ -139,6 +141,7 @@ function UpdateEmployee(req, res, next) {
             req.success = false;
             res.statusCode = 500;
         } else {
+            clearCache();
             req.success = true;
         }
         
@@ -176,6 +179,7 @@ function DeleteEmployee(req, res, next) {
             req.success = false;
             res.statusCode = 500;
         } else {
+            clearCache();
             req.success = true;
         }
         
@@ -247,6 +251,7 @@ function UpdateService(req, res, next) {
             req.success = false;
             res.statusCode = 500;
         } else {
+            clearCache();
             req.success = true;
         }
         
@@ -281,6 +286,7 @@ function DeleteService(req, res, next) {
             req.success = false;
             res.statusCode = 500;
         } else {
+            clearCache();
             req.success = true;
         }
         
@@ -418,6 +424,13 @@ function encrypt(text){
     const encryptedPassword = cipher.final('base64');
 
     return encryptedPassword;
+}
+
+function clearCache() {
+    console.log(memoryCache.keys);
+    console.log('CACHE CLEARED');
+    console.log(memoryCache.keys);
+    memoryCache.clear();
 }
 //#endregion
 

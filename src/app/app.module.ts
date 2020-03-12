@@ -5,8 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { TransferHttpCacheModule } from '@nguniversal/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -29,6 +28,7 @@ import { ReferralService } from './services/referral.service';
 import { AuthGuard } from './helpers/auth-guard';
 import { CanDeactivateGuard } from './helpers/auth-deactivate';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { BrowserStateInterceptor } from './broswerstate.interceptor';
 
 @NgModule({
   imports: [
@@ -36,7 +36,6 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    TransferHttpCacheModule,
     BrowserTransferStateModule,
     AngularEditorModule,
     ReactiveFormsModule,
@@ -61,7 +60,12 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     AppContentService,
     ReferralService,
     AuthGuard, 
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BrowserStateInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [ AppComponent ]
 })
