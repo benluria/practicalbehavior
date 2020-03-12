@@ -350,7 +350,7 @@ router.post('/referral', createPDF, (req, res) => {
 
 router.post('/recaptcha', (req, res) => {
     const token = req.body.recaptcha;
-    const secretKey = "6LfXN3UUAAAAADbMsJT0zVE5Gv_P_E1xGmIdwGSa";
+    const secretKey = "6LdDp-AUAAAAAEzm8JATcrLOFQAXnW5JQhSS5raN";
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}&remoteip=${req.connection.remoteAddress}`;
 
     if(token === null || token === undefined){
