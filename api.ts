@@ -427,9 +427,6 @@ function encrypt(text){
 }
 
 function clearCache() {
-    console.log(memoryCache.keys);
-    console.log('CACHE CLEARED');
-    console.log(memoryCache.keys);
     memoryCache.clear();
 }
 //#endregion

@@ -37,6 +37,10 @@ export class AppContentService {
     return contentTable;
   }
 
+  removeTags(html: string) {
+    return html ? html.replace(/<[^>]*>/g, '') : '';
+  }
+
   // retrieve content from api
   async retrieveContent(refreshCache = false): Promise<AppContent[]> {
     try {

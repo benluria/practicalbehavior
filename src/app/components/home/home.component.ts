@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppContent, AppContentTable } from 'src/app/models/app-content.model';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { AppContentService } from 'src/app/services/app-content.service';
 import { PAGES } from '../../models/pages.const';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -17,23 +17,28 @@ export class HomeComponent implements OnInit {
 
   constructor(public domSanitizer: DomSanitizer, 
               private contentService: AppContentService,
-              private router: Router) { }
+              private router: Router,
+              private title: Title,
+              private meta: Meta) { }
 
   async ngOnInit() {
-    Promise.all([
+    const response = await Promise.all([
       this.contentService.getContentForPage(PAGES.home),
       this.contentService.retrieveContent()
-    ]).then((response) => {
-      this.appContent = response[0];
+    ]);
 
-      let tilesRaw = response[1];
-      tilesRaw = tilesRaw.filter(x => x.page == PAGES.home && x.description.indexOf('TILE:') >= 0);
-      tilesRaw.forEach(tile => {
-        const copy = Object.assign({}, tile);
-        copy.description = copy.description.replace('TILE:', '');
-        this.tiles.push(copy);
-      });
+    this.appContent = response[0];
+
+    let tilesRaw = response[1];
+    tilesRaw = tilesRaw.filter(x => x.page == PAGES.home && x.description.indexOf('TILE:') >= 0);
+    tilesRaw.forEach(tile => {
+      const copy = Object.assign({}, tile);
+      copy.description = copy.description.replace('TILE:', '');
+      this.tiles.push(copy);
     });
+  
+    this.title.setTitle('Practical Behavior Analysis');
+    this.meta.updateTag({name: 'description', content: this.contentService.removeTags(this.appContent['Hero Description'])}, `name='description'`)
   }
 
   goToPage(page: string) {

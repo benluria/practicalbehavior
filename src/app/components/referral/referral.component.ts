@@ -2,7 +2,7 @@ import { Component, OnInit, SecurityContext } from '@angular/core';
 import { AppContentTable } from 'src/app/models/app-content.model';
 import { AppContentService } from 'src/app/services/app-content.service';
 import { PAGES, CHECKBOXTYPES } from 'src/app/models/pages.const';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ReferralService } from 'src/app/services/referral.service';
 import { parsePhoneNumberFromString, parsePhoneNumber, CountryCode } from 'libphonenumber-js/min';
@@ -34,14 +34,21 @@ export class ReferralComponent implements OnInit {
     checked: boolean
   }[] = [];
     
-  constructor(private contentService: AppContentService,
-              private fb: FormBuilder,
-              private referralService: ReferralService) { }
+  constructor(
+    private contentService: AppContentService,
+    private fb: FormBuilder,
+    private referralService: ReferralService,
+    private title: Title,
+    private meta: Meta
+  ) { }
 
   async ngOnInit() {
     this.appContent = await this.contentService.getContentForPage(PAGES.referral);
     await this.getFormInfo();
     this.createForm();
+
+    this.title.setTitle(this.contentService.removeTags(this.appContent['Title']));
+    this.meta.updateTag({name: 'description', content: 'Submit a referral for services.'}, `name='description`);
   }
 
   async getFormInfo() {
