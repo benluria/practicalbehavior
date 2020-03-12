@@ -189,6 +189,9 @@ export class ReferralComponent implements OnInit {
     const group: FormGroup = groups[prefix] as FormGroup;
     if (!isChecked) {
       for(const key in group.controls) {
+        if (prefix == 'guardian' && key != 'name' && key != 'phone' && key != 'email') {
+          continue;
+        }
         const control = this.referral.get(`${prefix}.${key}`);
         control.setValidators([Validators.required, Validators.maxLength(50)]);
       }

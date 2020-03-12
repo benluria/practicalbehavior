@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'resources',
     component: ResourcesComponent
+  },
+  {
+    path: '*',
+    component: HomeComponent
   }
   
 ];

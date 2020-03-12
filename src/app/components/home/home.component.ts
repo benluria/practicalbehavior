@@ -30,12 +30,14 @@ export class HomeComponent implements OnInit {
     this.appContent = response[0];
 
     let tilesRaw = response[1];
-    tilesRaw = tilesRaw.filter(x => x.page == PAGES.home && x.description.indexOf('TILE:') >= 0);
-    tilesRaw.forEach(tile => {
-      const copy = Object.assign({}, tile);
-      copy.description = copy.description.replace('TILE:', '');
-      this.tiles.push(copy);
-    });
+    if (tilesRaw) {
+      tilesRaw = tilesRaw.filter(x => x.page == PAGES.home && x.description.indexOf('TILE:') >= 0);
+      tilesRaw.forEach(tile => {
+        const copy = Object.assign({}, tile);
+        copy.description = copy.description.replace('TILE:', '');
+        this.tiles.push(copy);
+      });
+    }
   
     this.title.setTitle('Practical Behavior Analysis');
     this.meta.updateTag({name: 'description', content: this.contentService.removeTags(this.appContent['Hero Description'])}, `name='description'`)
