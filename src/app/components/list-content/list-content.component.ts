@@ -124,8 +124,8 @@ export class ListContentComponent implements OnInit {
     this.appContentForm = this.fb.group(controls);
   }
 
-  async retrieveAppContent() {
-    const content = await this.contentService.retrieveContent();
+  async retrieveAppContent(refreshCache = false) {
+    const content = await this.contentService.retrieveContent(refreshCache);
     this.appContent = content.filter(x => x.page == this.page && x.description.indexOf('TILE:') < 0);
     
     if (this.page == PAGES.home) {
@@ -150,7 +150,7 @@ export class ListContentComponent implements OnInit {
     if (control.value) {
       const success = await this.contentService.updateContent(item.id, control.value);
       if (success) {
-        await this.retrieveAppContent();
+        await this.retrieveAppContent(true);
         this.setUpForm();
         //show confirmation
       } else {
@@ -169,6 +169,8 @@ export class ListContentComponent implements OnInit {
     const form = this.appContentForm.get('employee') as FormGroup;
     form.reset();
 
+    await this.contentService.retrieveContent(true);
+
     this.employees = await this.contentService.getEmployees();
   }
 
@@ -178,7 +180,7 @@ export class ListContentComponent implements OnInit {
       await this.contentService.deleteEmployee(id);
       const form = this.appContentForm.get('employee') as FormGroup;
       form.reset();
-  
+      await this.contentService.retrieveContent(true);
       this.employees = await this.contentService.getEmployees();  
     }
   }
